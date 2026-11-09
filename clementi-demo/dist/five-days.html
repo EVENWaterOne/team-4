@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#192b3d"><meta name="description" content="走进小房间，问清居民的限制，把有限人手安排到最需要的地方。"><title>Downstairs · 雨季里的五天</title>
+<link rel="stylesheet" href="downstairs.css"><link rel="stylesheet" href="scene.css"><link rel="stylesheet" href="home-exploration.css"><link rel="stylesheet" href="campaign-dialogue.css"><link rel="stylesheet" href="campaign.css">
+<script defer src="data.js"></script><script defer src="art.js"></script><script defer src="clementi-art.js"></script><script defer src="i18n.js"></script><script defer src="community.js"></script><script defer src="world.js"></script><script defer src="home-exploration.js"></script><script defer src="vendor/downstairs-ai/llm.js"></script><script defer src="campaign-engine.js"></script><script defer src="campaign-dialogue.js"></script><script defer src="campaign-app.js"></script><script defer src="scene-adapter.js"></script><script defer src="scene.bundle.js"></script>
+</head>
+<body class="campaign-body">
+<div id="game" class="game campaign-game">
+<div id="world-scene" aria-label="金文泰社区，可转动镜头并选择居民"><div id="world-error" hidden></div></div><div id="world" class="world-fallback" hidden></div>
+<header class="campaign-header"><div class="campaign-brand"><small>DOWNSTAIRS · CLEMENTI</small><h1>雨季里的五天</h1></div><div id="campaign-resources" aria-label="今天可以安排的资源"></div><nav class="campaign-tools" aria-label="走访与游戏工具"><button type="button" data-cp-action="notes">走访笔记</button><button type="button" data-cp-action="settings" aria-label="AI对话设置">设置</button><button type="button" data-cp-action="help" aria-label="玩法说明">?</button></nav></header>
+<main class="campaign-layout">
+<section class="campaign-requests" aria-labelledby="requests-title"><div class="cp-section-heading"><div><small id="campaign-day-label">今天的社区</small><h2 id="requests-title">今天要回应什么？</h2></div><span id="request-count">3项请求</span></div><div id="request-list"></div></section>
+<section class="campaign-plan" aria-labelledby="plan-title"><div class="cp-section-heading"><div><small>由你作出取舍</small><h2 id="plan-title">今天怎么安排？</h2></div><span id="plan-status">尚未执行</span></div><div id="plan-list"></div><div id="campaign-forecast"></div><div id="campaign-progress" aria-live="polite"></div><button id="advance-day" type="button" class="primary-button" data-cp-action="advance">执行今天的安排</button><p class="plan-caption">只有执行时才花钱。阅读、探索和聊天不会推进日期。</p></section>
+</main>
+<section id="campaign-roster" class="campaign-roster" aria-label="八户居民，点击了解与拜访"></section>
+<footer class="campaign-legend"><span>① 入户找线索</span><span>② 问清限制，再排行动</span><span>③ 推进一天，看结果</span><button type="button" data-cp-action="camera">社区全景</button><button type="button" data-cp-action="restart">重新开始</button><a href="classic.html">上一版</a></footer>
+</div>
+<div id="toast" class="toast" role="status" hidden></div><dialog id="modal" aria-labelledby="modal-title"><div id="modal-content"></div></dialog>
+</body></html>

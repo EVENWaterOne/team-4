@@ -1,0 +1,42 @@
+/* Paper post belongs to the left edge, beside the community observations. */
+#game .mailbox-button{left:20px;right:auto;top:auto;bottom:272px;display:grid;justify-items:center;gap:7px;width:144px;min-height:110px;padding:0 4px 4px;border:0;border-radius:0;background:transparent;color:var(--ink,#f4ecd9);box-shadow:none;isolation:isolate;overflow:visible;transform-origin:50% 75%;animation:none}
+#game .mailbox-button.has-unread{animation:none}
+#game .mailbox-button:focus-visible{outline:2px solid var(--gold,#eac789);outline-offset:7px;border-radius:6px}
+.mailbox-envelope{display:block;position:relative;width:108px;height:70px;perspective:360px;filter:drop-shadow(0 5px 5px #101b2d70)}
+.mailbox-envelope>span{position:absolute;display:block}
+.mail-envelope-back{inset:0;background:#d5bd92;border:1px solid #ae8c56;border-radius:3px;box-shadow:inset 0 0 0 2px #f2dfb340}
+.mail-envelope-paper{left:10px;right:10px;top:5px;height:58px;z-index:1;background:linear-gradient(#fff7e7,#f5ead0);border:1px solid #e1cfab;border-radius:2px;transform:translateY(0);transition:transform .35s;box-shadow:0 1px 2px #7e644c24;padding:11px 9px}
+.mail-envelope-paper i{display:block;height:2px;background:#aaa38c;margin:4px 0;opacity:.6}.mail-envelope-paper i:last-child{width:60%}
+.mail-envelope-left{inset:0;z-index:2;background:#ddc79e;clip-path:polygon(0 0,57% 57%,0 100%)}
+.mail-envelope-right{inset:0;z-index:2;background:#cfb78b;clip-path:polygon(100% 0,43% 57%,100% 100%)}
+.mail-envelope-front{inset:0;z-index:3;background:linear-gradient(145deg,#f0dfb9,#dfc696);clip-path:polygon(0 100%,0 80%,50% 35%,100% 80%,100% 100%);border-radius:0 0 3px 3px}
+.mail-envelope-flap{left:0;right:0;top:0;height:43px;z-index:4;background:linear-gradient(#f7e8c7,#e5cea0);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:50% 0;transition:transform .3s;backface-visibility:hidden}
+.mail-envelope-seal{left:43px;top:32px;width:23px;height:23px;z-index:5;display:grid!important;place-items:center;border-radius:50%;background:#b47b44;border:2px solid #d4ac6d;color:#fff0cf;font-family:Georgia,serif;font-size:7px;letter-spacing:-.5px;box-shadow:0 1px 2px #6c533e40;transition:opacity .2s}
+#game .mailbox-button:hover .mail-envelope-flap,#game .mailbox-button:focus-visible .mail-envelope-flap{transform:rotateX(-24deg)}
+#game .mailbox-button:hover .mail-envelope-paper{transform:translateY(-6px)}
+.mailbox-caption{display:flex;flex-direction:column;gap:3px;text-align:center;max-width:136px;text-shadow:0 2px 4px #101929}.mailbox-caption strong{font-size:12px;font-weight:600;letter-spacing:.05em;color:#f4dca5}.mailbox-caption small{font-size:9px;line-height:1.5;color:#c8cbbf}
+#game .mailbox-button .mailbox-count{position:absolute;top:-8px;right:10px;min-width:23px;height:23px;border:2px solid #35435a;box-shadow:0 2px 4px #12213766;background:#f0d08b;color:#293247;font-size:11px;z-index:6}
+#game .mailbox-button .mailbox-count[hidden]{display:none}
+#game .mailbox-button.is-arriving{animation:cm-mail-delivery 1.5s cubic-bezier(.22,.75,.22,1) both}
+.mailbox-button.is-arriving .mail-envelope-paper{animation:cm-mail-paper 1.5s ease-out both}
+.mailbox-button.is-arriving .mail-envelope-flap{animation:cm-mail-flap 1.5s ease-in-out both}
+.mailbox-button.is-arriving .mail-envelope-seal{animation:cm-mail-seal 1.5s ease-out both}
+.mailbox-button.is-opening .mail-envelope-flap{animation:cm-mail-open .65s ease-in-out both}
+.mailbox-button.is-opening .mail-envelope-paper{transform:translateY(-18px)}
+.mailbox-button.is-opening .mail-envelope-seal{opacity:0}
+#game .world-feed{max-height:calc(100dvh - 530px)}
+/* The resident postbag uses little folded-paper markers, without changing its actions. */
+.mail-list .mail-row{position:relative;padding-left:58px;background:linear-gradient(115deg,#31465d,#293d55);border-color:#bda77e66;animation:cm-mail-list-in .35s both;overflow:hidden}
+.mail-list .mail-row:before{content:'';position:absolute;left:14px;top:23px;width:28px;height:20px;background:linear-gradient(34deg,transparent 49%,#b6986577 50%,transparent 53%) bottom left/50% 100% no-repeat,linear-gradient(-34deg,transparent 49%,#b6986577 50%,transparent 53%) bottom right/50% 100% no-repeat,#ead9b7;border:1px solid #bda16d;border-radius:2px;box-shadow:0 2px 3px #17243a55}
+.mail-list .mail-row:after{content:'';position:absolute;left:15px;top:24px;width:26px;height:13px;background:#f4e6c7;clip-path:polygon(0 0,100% 0,50% 100%);filter:drop-shadow(0 1px 0 #b69c7066)}
+.mail-list .mail-row:nth-child(2){animation-delay:.04s}.mail-list .mail-row:nth-child(3){animation-delay:.08s}.mail-list .mail-row:nth-child(4){animation-delay:.12s}
+.mail-list .mail-row:hover{border-color:#e8c786;background:#344b62}.mail-list .mail-row svg{width:42px;height:50px}.mail-list .mail-row .unread-dot{box-shadow:0 0 0 4px #eac78912}
+@keyframes cm-mail-delivery{0%{opacity:0;transform:translateX(-155px) rotate(-9deg)}43%{opacity:1;transform:translateX(9px) rotate(4deg)}64%{transform:translateX(-4px) rotate(-2deg)}82%,100%{opacity:1;transform:translateX(0) rotate(0)}}
+@keyframes cm-mail-paper{0%,35%{transform:translateY(7px)}58%,78%{transform:translateY(-23px)}100%{transform:translateY(-7px)}}
+@keyframes cm-mail-flap{0%,34%{transform:rotateX(0)}54%,83%{transform:rotateX(-145deg)}100%{transform:rotateX(-20deg)}}
+@keyframes cm-mail-seal{0%,33%{opacity:1}46%,100%{opacity:0}}
+@keyframes cm-mail-open{0%{transform:rotateX(0)}65%,100%{transform:rotateX(-145deg)}}
+@keyframes cm-mail-list-in{from{opacity:0;transform:translateX(-9px)}to{opacity:1;transform:translateX(0)}}
+@media(max-width:850px){#game .mailbox-button{left:12px;right:auto;bottom:272px;width:128px;min-height:104px}#game .world-feed{max-height:calc(100dvh - 545px)}.mailbox-caption small{display:block!important}.mailbox-envelope{width:100px;height:65px}.mail-envelope-flap{height:40px}.mail-envelope-seal{left:39px;top:30px}}
+@media(max-width:560px){#game .mailbox-button{left:12px;top:141px;bottom:auto;width:128px;min-height:93px}.mailbox-envelope{width:94px;height:61px}.mail-envelope-flap{height:37px}.mail-envelope-seal{left:36px;top:28px;width:22px;height:22px}.mailbox-caption{gap:1px}.mailbox-caption strong{font-size:11px}.mailbox-caption small{font-size:8px}#game .mailbox-button .mailbox-count{right:9px;top:-6px}#game .world-feed{top:251px;max-height:max(44px,calc(100dvh - 568px))}.mail-list .mail-row{padding-left:50px;gap:9px}.mail-list .mail-row:before{left:10px;width:26px}.mail-list .mail-row:after{left:11px;width:24px}.mail-list .mail-row svg{width:35px;height:43px}}
+@media(prefers-reduced-motion:reduce){#game .mailbox-button,#game .mailbox-button *,.mail-list .mail-row{animation:none!important;transition:none!important}.mailbox-button.is-arriving .mail-envelope-paper{transform:translateY(-8px)}.mailbox-button.is-arriving .mail-envelope-flap{transform:rotateX(-20deg)}}

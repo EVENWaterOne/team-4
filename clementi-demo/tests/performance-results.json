@@ -1,0 +1,81 @@
+{
+  "method": {
+    "browser": "Microsoft Edge headless with software WebGL",
+    "viewport": {
+      "width": 936,
+      "height": 628
+    },
+    "animation": "Controlled requestAnimationFrame callbacks, 40ms timestamps; GPU rendering retained",
+    "repeatedUiCalls": 20,
+    "pausedFrameCallbacksOffered": 12,
+    "baseline": "Previous shipped standalone HTML restored into an isolated directory",
+    "meaning": "Work counters, not an FPS or power-consumption benchmark"
+  },
+  "browser": {
+    "before": {
+      "pausedSceneDraws": 12,
+      "hiddenSceneDraws": 5,
+      "repeatedUiDomMutations": 980,
+      "threeStepPathStorageWrites": 3
+    },
+    "after": {
+      "pausedSceneDraws": 0,
+      "hiddenSceneDraws": 0,
+      "repeatedUiDomMutations": 20,
+      "threeStepPathStorageWrites": 1
+    }
+  },
+  "fixture": {
+    "durationSeconds": 10,
+    "pausedBefore": {
+      "textWrites": 288,
+      "htmlWrites": 24,
+      "attributeWrites": 24,
+      "globalDomQueries": 24,
+      "sceneSyncs": 12
+    },
+    "hiddenBefore": {
+      "textWrites": 312,
+      "htmlWrites": 26,
+      "attributeWrites": 26,
+      "globalDomQueries": 26,
+      "sceneSyncs": 13
+    },
+    "pausedAndHiddenAfter": {
+      "textWrites": 0,
+      "htmlWrites": 0,
+      "attributeWrites": 0,
+      "globalDomQueries": 0,
+      "sceneSyncs": 0
+    },
+    "fourStepPathBefore": {
+      "saves": 4,
+      "objectDomQueries": 6
+    },
+    "fourStepPathAfter": {
+      "saves": 1,
+      "objectDomQueries": 1
+    },
+    "fiftyUnchangedDialogueRefreshesBefore": {
+      "ruleNoteRecomputations": 50,
+      "dialogueHtmlReplacements": 50
+    },
+    "fiftyUnchangedDialogueRefreshesAfter": {
+      "ruleNoteRecomputations": 0,
+      "dialogueHtmlReplacements": 0
+    }
+  },
+  "offline": {
+    "beforeBytes": 7171285,
+    "afterBytes": 2699021,
+    "reductionPercent": 62.36
+  },
+  "preserved": [
+    "Gameplay rules and timing",
+    "Three.js pixel ratio and 2048px shadow maps",
+    "Scene models and household exploration",
+    "Mail delivery animations and resident dialogue",
+    "Save compatibility"
+  ],
+  "limitation": "Running main-scene GPU draw cost still depends on hardware; these counters do not establish a whole-game FPS gain."
+}

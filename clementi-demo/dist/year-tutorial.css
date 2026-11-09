@@ -1,0 +1,126 @@
+/* Round-one tutorial: grey screen, one area left in colour, a gold loop drawn around it, and a small note beside it. */
+.yr-tour{position:fixed;inset:0;z-index:900;pointer-events:none;color:#f3ead6;font-family:inherit;letter-spacing:0}
+.yr-tour[hidden]{display:none}
+.yr-tour-shade{position:absolute;inset:0;background:#0b1620b8;-webkit-backdrop-filter:grayscale(1) brightness(.72);backdrop-filter:grayscale(1) brightness(.72);-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;animation:yr-tour-fade .3s ease-out}
+.yr-tour-shade[hidden],.yr-tour-cover[hidden],.yr-tour-tap[hidden]{display:none}
+.yr-tour-block{position:absolute;pointer-events:auto;background:transparent;cursor:default}
+.yr-tour-cover{inset:0}
+.yr-tour-ring{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.yr-tour-ring path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.yr-tour-ring .is-glow{stroke:#ffd27a40;stroke-width:11}
+.yr-tour-ring .is-line{stroke:#ffd27a;stroke-width:3.6;filter:drop-shadow(0 0 5px #ffcf7099)}
+.yr-tour:not(.is-reduced) .yr-tour-ring .is-glow{animation:yr-tour-breathe 2.4s ease-in-out .8s infinite}
+.yr-tour[data-mode="free"] .yr-tour-ring .is-line{stroke-dasharray:none;filter:drop-shadow(0 0 6px #000c) drop-shadow(0 0 5px #ffcf7099)}
+
+/* A tapping finger over the thing to press. */
+.yr-tour-tap{position:absolute;width:0;height:0;pointer-events:none}
+.yr-tour-tap::before,.yr-tour-tap::after{content:"";position:absolute;left:-26px;top:-26px;width:52px;height:52px;border:2.5px solid #ffd27a;border-radius:50%;opacity:0}
+.yr-tour:not(.is-reduced) .yr-tour-tap::before{animation:yr-tour-ripple 1.6s ease-out infinite}
+.yr-tour:not(.is-reduced) .yr-tour-tap::after{animation:yr-tour-ripple 1.6s ease-out .55s infinite}
+.yr-tour.is-reduced .yr-tour-tap::before{opacity:1}
+.yr-tour-tap i{position:absolute;left:-14px;top:-3px;width:30px;height:34px;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 28'%3E%3Cpath d='M9 13V4.5a2 2 0 0 1 4 0V12m0-1.5a2 2 0 0 1 4 0V13m0-1a2 2 0 0 1 4 0v5.5A8.5 8.5 0 0 1 12.5 26h-.8a7 7 0 0 1-5.6-2.8L2.6 18.6a2.1 2.1 0 0 1 3.2-2.7L9 19' fill='%23f6ecd4' stroke='%23203b4f' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");filter:drop-shadow(0 3px 0 #0006)}
+.yr-tour:not(.is-reduced) .yr-tour-tap i{animation:yr-tour-press 1.6s ease-in-out infinite}
+
+/* The note. */
+.yr-tour-card{position:absolute;left:0;top:0;box-sizing:border-box;width:min(340px,calc(100vw - 32px));padding:0 16px 10px;overflow:hidden;border:1px solid #edcd8b8c;border-radius:14px;background:#1f3a4e;box-shadow:0 18px 44px #000a,0 3px 0 #0f2232;pointer-events:auto;text-align:left}
+.yr-tour[data-mode="free"] .yr-tour-card{box-shadow:0 10px 28px #0009,0 3px 0 #0f2232}
+.yr-tour-card.is-in{animation:yr-tour-card .26s ease-out}
+.yr-tour-card.is-nudge{animation:yr-tour-nudge .36s ease-in-out}
+.yr-tour.is-reduced .yr-tour-card{animation:none}
+.yr-tour-card::before{content:"";position:absolute;width:16px;height:16px;background:#1f3a4e;border:1px solid #edcd8b8c;transform:rotate(45deg);display:none}
+.yr-tour-card[data-side="bottom"]::before{display:block;top:-9px;left:calc(var(--tail) - 8px);border-right:0;border-bottom:0}
+.yr-tour-card[data-side="top"]::before{display:block;bottom:-9px;left:calc(var(--tail) - 8px);border-left:0;border-top:0}
+.yr-tour-card[data-side="right"]::before{display:block;left:-9px;top:calc(var(--tail) - 8px);border-right:0;border-top:0}
+.yr-tour-card[data-side="left"]::before{display:block;right:-9px;top:calc(var(--tail) - 8px);border-left:0;border-bottom:0}
+.yr-tour-card[data-side]{overflow:visible}
+.yr-tour-progress{height:4px;margin:0 -16px 12px;border-radius:14px 14px 0 0;background:#f3ead61f;overflow:hidden}
+.yr-tour-progress i{display:block;width:var(--p);height:100%;background:#edcd8b;transition:width .4s ease-out}
+.yr-tour-top{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.yr-tour-top>div{flex:1 1 auto;min-width:0}
+.yr-tour-top small{display:block;color:#c9d6cf;font-size:11px;line-height:1.4}
+.yr-tour-top h3{margin:1px 0 0;color:#ffe6ad;font-size:18px;line-height:1.3;font-weight:700}
+.yr-tour-guide{flex:0 0 40px;width:40px;height:40px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;border-radius:50%;background:#f6ecd4;box-shadow:inset 0 -3px 0 #d9c7a1}
+.yr-tour-guide img{width:auto;height:35px;image-rendering:pixelated;transform:translateY(3px)}
+.yr-tour-text{margin:0;font-size:14px;line-height:1.6;color:#f3ead6}
+.yr-tour-vis{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.yr-tour-foot{display:flex;align-items:center;gap:8px;margin-top:10px}
+.yr-tour-foot>span:not(.yr-tour-hint){flex:1 1 auto}
+.yr-tour-foot .primary-button{min-height:36px;padding:6px 16px;font-size:14px}
+.yr-tour-foot .yr-tour-skip{padding:4px 2px;color:#a9bdb5;font-size:12px}
+.yr-tour-foot .yr-tour-skip:hover{color:#ffe1a0}
+.yr-tour-hint{display:inline-flex;align-items:center;gap:5px;color:#ffe1a0;font-size:12px}
+.yr-tour-hint .yr-tour-hand{width:16px;height:16px}
+.yr-tour-card button:focus-visible{outline:2px solid #ffe1a0;outline-offset:2px}
+.yr-tour-card .ui-icon,.yr-tour-card svg{flex:0 0 auto}
+
+/* —— The small pictures —— */
+.yr-tour-vis svg{width:16px;height:16px}
+.yt-goals{display:grid;grid-template-columns:1fr auto;grid-auto-rows:auto;align-items:center;gap:5px 12px;padding:10px 12px;border-radius:10px;background:#16303f}
+.yt-goals>span{grid-column:1;display:flex;align-items:center;gap:8px}
+.yt-goals>span i{position:relative;flex:1 1 auto;height:8px;border-radius:4px;background:#f3ead624}
+.yt-goals>span i::before{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--a);border-radius:4px;background:currentColor}
+.yt-goals>span b{position:absolute;left:var(--t);top:-4px;width:2px;height:16px;background:#f3ead6}
+.yt-goals .is-stay{color:#f2a25c}.yt-goals .is-social{color:#62c0cf}.yt-goals .is-comfort{color:#b5d98a}
+.yt-goals em{grid-column:2;grid-row:1 / span 3;display:flex;align-items:center;gap:4px;font-style:normal;color:#ffe6ad;font-size:15px}
+.yt-goals em b{font-size:18px}
+.yt-loop{display:flex;align-items:center;gap:4px;padding:8px 10px;border-radius:10px;background:#16303f}
+.yt-loop>span{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:40px;color:#edcd8b}
+.yt-loop>span svg{width:20px;height:20px}
+.yt-loop small{color:#d7e1db;font-size:11px;white-space:nowrap}
+.yt-loop-arrow{display:inline-flex;color:#8fa59d;font-style:normal}
+.yt-loop-arrow svg{width:12px!important;height:12px!important}
+.yt-loop>b{margin-left:auto;padding:3px 8px;border:1px dashed #edcd8b99;border-radius:999px;color:#ffe6ad;font-size:13px;white-space:nowrap}
+.yt-chips{display:flex;flex-wrap:wrap;gap:6px}
+.yt-chip{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border:1px solid #a0b19b55;border-radius:999px;background:#2a475b;font-size:12px;color:#f3ead6;white-space:nowrap}
+.yt-chip.is-listen svg{color:#9fd3dc}.yt-chip.is-care svg{color:#f2a5a0}.yt-chip.is-form svg{color:#c9d6cf}.yt-chip.is-ask svg{color:#ffd27a}
+.yt-chip.is-glow{border-color:#ffd27a;box-shadow:0 0 0 3px #ffd27a26}
+.yt-chip.is-warn{border-color:#e9b29488;color:#ffd9c4}.yt-chip.is-warn svg{color:#e9b294}
+.yt-trust{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:10px;background:#16303f}
+.yt-trust-bar{display:inline-flex;gap:4px}
+.yt-trust-bar i{width:24px;height:7px;border-radius:4px;background:#f3ead62e}
+.yt-trust-bar i.is-on{background:#c9d6cf}
+.yt-trust-bar i.is-key{background:#ffd27a;box-shadow:0 0 0 2px #ffd27a33}
+.yt-card{display:flex;align-items:center;gap:12px}
+.yt-card-face{position:relative;flex:0 0 74px;height:98px;border-radius:9px;background:#f6ecd4;box-shadow:0 3px 0 #0004;color:#203b4f}
+.yt-card-face::before{content:"";position:absolute;left:0;right:0;top:0;height:38px;border-radius:9px 9px 0 0;background:#3f8f8f}
+.yt-card-cost,.yt-card-staff{position:absolute;top:5px;display:inline-flex;align-items:center;gap:2px;padding:1px 5px;border-radius:999px;background:#f6ecd4;font-size:11px;font-weight:700}
+.yt-card-cost{left:5px;box-shadow:0 0 0 2px #ffd27a}.yt-card-staff{right:5px;box-shadow:0 0 0 2px #9fd3dc}
+.yt-card-cost svg,.yt-card-staff svg{width:11px!important;height:11px!important}
+.yt-card-fx{position:absolute;left:7px;right:7px;bottom:7px;display:flex;flex-direction:column;gap:4px;padding:3px;border-radius:5px;box-shadow:0 0 0 2px #edcd8b}
+.yt-card-fx>span{display:flex;align-items:center;gap:4px}
+.yt-card-fx svg{width:10px!important;height:10px!important}
+.yt-card-fx i{display:flex;gap:2px}
+.yt-card-fx b{width:7px;height:7px;border-radius:1px;background:currentColor}
+.yt-card-fx .is-stay{color:#b45a14}.yt-card-fx .is-social{color:#1d7a8c}.yt-card-fx .is-comfort{color:#4f7f22}
+.yt-card-keys{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none;font-size:12px;color:#d7e1db}
+.yt-card-keys li{display:flex;align-items:center;gap:6px}
+.yt-card-keys li:nth-child(1) svg{color:#ffd27a}.yt-card-keys li:nth-child(2) svg{color:#9fd3dc}
+.yt-block{display:inline-block;width:12px;height:12px;border-radius:2px;background:#edcd8b}
+.yt-types{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.yt-types span{display:flex;flex-direction:column;gap:1px;padding:5px 7px;border-radius:7px;color:#fff;font-size:12px;line-height:1.3}
+.yt-types small{opacity:.85;font-size:11px}
+.yt-types .is-community{background:#3f8f8f}.yt-types .is-service{background:#4a6b9a}.yt-types .is-capital{background:#b5643c}
+.yt-preview{display:flex;flex-wrap:wrap;gap:6px 12px;padding:9px 12px;border-radius:10px;background:#16303f;font-size:13px}
+.yt-preview>span{display:inline-flex;align-items:center;gap:3px}
+.yt-preview>span>svg:first-child{width:15px;height:15px}
+.yt-preview .yt-loop-arrow,.yt-preview svg+b+svg{width:11px!important;height:11px!important;color:#8fa59d}
+.yt-preview em{margin-left:2px;font-style:normal;font-size:11px;color:#b5d98a}
+.yt-preview em.is-neg{color:#e9b294}
+.yt-preview .is-stay>svg:first-child{color:#f2a25c}.yt-preview .is-social>svg:first-child{color:#62c0cf}.yt-preview .is-comfort>svg:first-child{color:#b5d98a}.yt-preview .is-cash>svg:first-child{color:#ffd27a}
+
+@keyframes yr-tour-fade{from{opacity:0}to{opacity:1}}
+@keyframes yr-tour-card{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes yr-tour-nudge{0%,100%{transform:none}25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-3px)}}
+@keyframes yr-tour-breathe{0%,100%{stroke:#ffd27a33}50%{stroke:#ffd27a66}}
+@keyframes yr-tour-ripple{0%{opacity:.9;transform:scale(.45)}100%{opacity:0;transform:scale(1.35)}}
+@keyframes yr-tour-press{0%,100%{transform:translate(0,0)}40%{transform:translate(-2px,-4px)}55%{transform:translate(0,1px) scale(.94)}}
+@media (max-height:760px){.yr-tour-card{padding-bottom:8px}.yr-tour-text{font-size:13px;line-height:1.5}.yr-tour-top h3{font-size:16px}.yr-tour-guide{flex-basis:34px;width:34px;height:34px}.yr-tour-guide img{height:30px}.yr-tour-vis{margin-top:8px;gap:6px}}
+/* The year's homes at a glance: heard (gold), turned away (grey), still to visit (dashed) */
+.yt-homes{display:flex;flex-wrap:wrap;align-items:center;gap:7px;padding:9px 12px;border-radius:10px;background:#16303f}
+.yt-homes>span{position:relative;display:inline-flex;width:34px;height:34px;border-radius:8px;background:#f0dfba;box-shadow:0 0 0 2px #edcd8b}
+.yt-homes>span>svg:first-child{width:34px;height:34px;border-radius:8px;image-rendering:pixelated}
+.yt-homes>span>i{position:absolute;right:-6px;bottom:-6px;display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;border-radius:50%;background:#edcd8b;color:#2b3b48}
+.yt-homes>span>i svg{width:11px!important;height:11px!important}
+.yt-homes>span.is-refused{box-shadow:0 0 0 2px #8e9f90;filter:grayscale(.85);opacity:.7}.yt-homes>span.is-refused>i{background:#8e9f90}
+.yt-homes>span.is-left{background:#22404f;box-shadow:none;outline:1.5px dashed #c1d0c9;outline-offset:1px}.yt-homes>span.is-left>svg:first-child{opacity:.55}.yt-homes>span.is-left>i{background:#2a475b;color:#d0ded3;box-shadow:0 0 0 1.5px #c1d0c9}
+.yt-homes em{margin-left:auto;font-style:normal;font-size:13px;color:#c1d0c9;white-space:nowrap}.yt-homes em b{margin-right:2px;font-size:18px;color:var(--gold,#edcd8b)}

@@ -1,0 +1,10 @@
+node_modules/
+*.zip
+*.tar.gz
+.sites-runtime/
+!dist/
+# Local DeepSeek key — stays on this computer
+deepseek-key.txt
+
+# Launcher log (written on every start)
+launch-log.txt

@@ -1,0 +1,15 @@
+/* Sound button in the top bar and its small volume panel. */
+.year-body .yr-sound-button.is-muted{color:#9fb2a9}
+.year-body .yr-sound-button.is-muted .ui-icon{opacity:.85}
+.yr-sound-pop{position:fixed;z-index:60;width:264px;box-sizing:border-box;padding:12px 14px 13px;border:1px solid #a0b19b80;border-radius:12px;background:#1b3346;box-shadow:0 10px 0 #0d1d2a59,0 18px 40px #0008;color:#f3ead6;font-size:13px}
+.yr-sound-pop[hidden]{display:none}
+.yr-sound-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+.yr-sound-head strong{font-size:14px;color:#f6dca4}
+.yr-sound-mute{display:inline-flex;align-items:center;gap:6px;padding:4px 10px 4px 7px;border:1px solid #a0b19b73;border-radius:99px;background:#2a475b;color:#f3ead6;font:inherit;font-size:12px;cursor:pointer}
+.yr-sound-mute .ui-icon{width:15px;height:15px}
+.yr-sound-mute.is-on{border-color:#edcd8b;background:#edcd8b26;color:#ffe6ad}
+.yr-sound-row{display:grid;grid-template-columns:20px 3.4em minmax(0,1fr) 2.2em;align-items:center;gap:8px;padding:6px 0}
+.yr-sound-ico{display:flex;color:var(--gold,#edcd8b)}.yr-sound-ico .ui-icon{width:18px;height:18px}
+.yr-sound-name{color:#d0ded3}
+.yr-sound-row output{text-align:right;font-variant-numeric:tabular-nums;color:#c1d0c9;font-size:12px}
+.yr-sound-row input[type=range]{width:100%;height:20px;margin:0;background:transparent;accent-color:#edcd8b;cursor:pointer}

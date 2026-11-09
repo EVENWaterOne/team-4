@@ -1,3 +1,30 @@
+# 最终版本 · Downstairs 金文泰
+
+当前游戏在 **`clementi-demo/`**，支持中文／English。
+
+## 启动方式
+
+1. 下载本分支 ZIP 并完整解压，或克隆本分支。
+2. 安装 Node.js 后，双击仓库根目录的 **`启动游戏.cmd`**。
+3. 浏览器会打开 **http://127.0.0.1:4201/**，选择金文泰开始游戏。
+
+手动启动：
+
+```sh
+cd clementi-demo
+node server.cjs
+```
+
+无需安装 npm／pnpm 依赖。也可直接打开 `clementi-demo/金文泰-AI整合版.html` 体验离线版本。
+
+使用 DeepSeek：将自己的 API Key 写在 `clementi-demo/deepseek-key.txt` 第一行，再启动游戏；此文件已被 Git 忽略，不随仓库上传。未配置时可使用预设对白。
+
+详细玩法与更新记录见 [clementi-demo/README.md](clementi-demo/README.md)。
+
+---
+
+## 原项目说明（留档）
+
 # HDB Eco Community
 
 A browser-based serious game about making an existing HDB neighbourhood greener, cooler, and financially sustainable. Plan public green spaces, retrofit residential blocks, and use policy cards before a heatwave and the final project inspection.

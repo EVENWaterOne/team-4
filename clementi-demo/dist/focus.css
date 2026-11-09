@@ -1,0 +1,303 @@
+/* A single resident need leads the screen; community goals stay visible. */
+#game .ui-icon,.modal-body .ui-icon{display:inline-block;width:18px;height:18px;flex:0 0 18px;vertical-align:-3px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#game .brand{left:20px;top:17px;width:auto}
+#game .brand h1{font-size:29px;line-height:1.1;margin:4px 0}
+#game .brand .edition{font-size:9px;letter-spacing:.09em}
+#game .resource-bar{left:224px;right:260px;top:16px;max-width:none;min-width:0;width:auto;transform:none;gap:14px;justify-content:center;padding:8px 12px;background:#1b2c40ed;border-color:#a6b5ab55;box-shadow:0 3px 12px #10223840;backdrop-filter:none}
+#game .resources{gap:20px;min-width:0}
+#game .resource{min-width:58px;gap:1px}
+#game .resource strong{font-size:17px}
+#game .resource small,#game .resource em{font-size:11px}
+#game .time-controls{gap:5px;padding-left:11px}
+#game .time-controls #clock{font-size:11px}
+#game .time-controls button{min-width:30px;min-height:32px}
+#game .play-controls{right:18px;top:17px;padding:4px;border-color:#a6b5ab55;background:#1b2c40ed;backdrop-filter:none}
+#game .play-controls button{min-height:33px;padding:6px 8px}
+
+#game .focus-panel{position:absolute;z-index:18;left:20px;top:101px;width:286px;padding:15px 16px;background:#20364a;border:1px solid #d9ba7d;border-radius:12px;color:var(--ink);box-shadow:0 7px 22px #12233445;pointer-events:auto}
+#game .focus-panel:empty{display:none}
+.focus-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--gold);font-size:11px;letter-spacing:.035em}
+.focus-heading>span{display:flex;align-items:center;gap:6px}
+.focus-heading button{padding:4px 0;min-height:27px;border:0;background:transparent;color:#d6dfd3;font-size:11px;letter-spacing:0}
+.focus-person{display:flex;align-items:center;gap:11px;margin-top:12px;min-width:0}
+.focus-avatar{width:48px;height:59px;flex:0 0 48px;display:grid;place-items:center;background:#abc7b213;border:1px solid #aebd9e45;border-radius:7px;overflow:hidden}
+.focus-avatar svg{display:block;width:46px;height:57px;image-rendering:pixelated}
+.focus-title{min-width:0;flex:1}
+.focus-title h2{font-size:17px;font-weight:600;line-height:1.45;margin:0 0 5px;overflow-wrap:anywhere;color:#fff0d3}
+.focus-title>span{font-size:11px;line-height:1.6;color:#bdcbc5}
+.focus-title .need-state{margin-left:5px}
+.focus-next{margin:11px 0 0;font-size:12px;line-height:1.65;color:#d5e0d7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.focus-next .ui-icon{color:#e8c989;margin-right:4px}
+.focus-actions{display:flex;gap:8px;margin-top:13px;align-items:center;flex-wrap:wrap}
+.focus-actions .primary-button{flex:1;min-height:40px;display:flex;align-items:center;justify-content:center;gap:7px;padding:9px 11px;font-size:13px!important;box-shadow:0 2px 0 #8b7049}
+.focus-actions .secondary-button{min-height:40px;padding:8px 10px;font-size:12px!important}
+.focus-milestone{display:flex;align-items:flex-start;gap:6px;margin-top:12px;padding-top:10px;border-top:1px solid #c5bb9740;font-size:11px;line-height:1.6;color:#b9cdb8}
+.focus-milestone .ui-icon{width:15px!important;height:15px!important;flex-basis:15px!important;margin-top:1px}
+
+#game .world-feed{left:20px;top:auto;bottom:226px;width:286px;max-height:min(174px,max(60px,calc(100dvh - 640px)));padding:10px 13px;border-radius:10px;background:#1c3044e8;border-color:#9baea452;backdrop-filter:none;scrollbar-width:thin}
+#game .world-feed .dock-heading{margin-bottom:5px}
+#game .world-feed .dock-heading h2{font-size:12px}
+#game .world-issue{padding:8px 0;gap:8px}
+#game .world-issue strong{font-size:12px;font-weight:500}
+#game .world-issue small{font-size:11px}
+#game .world-issue .issue-symbol{font-size:18px}
+#game .world-feed .empty-copy{font-size:11px;margin:5px 0}
+#game .world-feed .project-title{font-size:11px;margin:9px 0 3px}
+#game .project-mini{font-size:11px;padding:6px 0}
+#game .neighbour-dock{right:18px;top:101px;width:238px;max-height:calc(100dvh - 155px);padding:12px;background:#1c3044ed;border-color:#9baea452;backdrop-filter:none;scrollbar-width:thin}
+#game .neighbour-dock .dock-heading{margin-bottom:8px}
+#game .neighbour-dock .dock-heading h2{font-size:12px}
+#game .neighbour-list{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+#game .neighbour-chip{padding:3px 2px;border-radius:6px;background:#a8b8a00b}
+#game .neighbour-chip svg{height:36px}
+#game .neighbour-chip span{display:block;font-size:10px;line-height:1.5}
+#game .objectives-new{padding-top:13px}
+#game #metrics{display:grid;grid-template-columns:1fr;gap:0}
+#game .metric-row{padding:9px 0;gap:6px;grid-template-columns:1fr auto;border-color:#a1b29d30}
+#game .metric-row span{font-size:12px;line-height:1.5}
+#game .metric-row strong{font-size:15px;font-weight:600;color:#e9d29c;font-variant-numeric:tabular-nums}
+#game .metric-row progress{height:5px;accent-color:#b4cba1}
+#game .stability{font-size:11px;line-height:1.6;padding-top:9px;color:#c8d3c9}
+#game .rulebook-link{font-size:11px;font-weight:500;padding:8px;margin-top:10px;border-color:#bdb59466;background:#dfc28d0a;animation:none}
+#game .hand-dock{left:330px;right:278px;bottom:40px;z-index:16}
+#game .hand-heading{padding:0 2px 4px;align-items:center;gap:9px}
+#game .hand-heading h2{font-size:12px;font-weight:500;line-height:1.5}
+#game .hand-heading small{display:none}
+#game .library-opener{padding:7px 10px;font-size:11px;border:1px solid #d3bc8266;color:#f2dfb5;background:#243c51;border-radius:6px;font-weight:500}
+#game .hand-cards{gap:9px;justify-content:center;padding:8px 3px 5px}
+#game .hand-cards .play-card{width:160px;flex:0 0 160px;min-height:173px;padding:8px;border-width:1px;border-radius:9px;background:#253e52;box-shadow:0 4px 11px #142a3c55}
+#game .hand-cards .play-card:hover,#game .hand-cards .play-card:focus-visible{transform:translateY(-4px)}
+#game .hand-cards .play-card h3{font-size:13px;line-height:1.4;min-height:35px;margin:4px 0}
+#game .hand-cards .card-art{height:47px;margin:5px 0}
+#game .hand-cards .card-category{font-size:10px}
+#game .hand-cards .card-fees{font-size:11px;gap:6px;line-height:1.5}
+#game .hand-cards .card-status{font-size:10px;line-height:1.5;margin-top:4px}
+#game .hand-cards .card-pip{width:23px;min-width:23px;height:23px;left:-4px;top:-6px;font-size:12px}
+.need-match{display:inline-flex;align-items:center;gap:4px;font-size:11px;line-height:1.5;font-weight:500;color:#bed3bc;padding:3px 6px;background:#bed3bc10;border-radius:4px;max-width:100%;overflow-wrap:anywhere}
+.need-match[data-kind="partial"]{color:#edc88b;background:#edc88b10}
+.need-match[data-kind="other"]{color:#bfcbc9;background:#bfcbc90c}
+.need-match .ui-icon{width:14px!important;height:14px!important;flex-basis:14px!important}
+#game .hand-cards .need-match{margin:4px 0 0}
+#game .mailbox-button{left:20px;right:auto;top:auto;bottom:51px;width:126px;min-height:105px}
+#game .mailbox-caption small{font-size:11px}
+#game .mailbox-caption strong{font-size:12px}
+#game .camera-controls{left:50%;right:auto;bottom:300px;transform:translateX(-50%);max-width:calc(100vw - 620px);gap:3px;padding:4px;background:#1b2d40d9;backdrop-filter:none;border-color:#a6b5ab55}
+#game .camera-controls button{font-size:12px;padding:5px 7px;min-height:30px;white-space:nowrap}
+#game .living-guide{display:none}
+#game .time-state{top:77px;left:50%;right:auto;transform:translateX(-50%);font-size:11px;padding:3px 9px;background:#1b3043c9;pointer-events:none}
+#game .event-notice{left:50%;right:auto;top:112px;bottom:auto;transform:translateX(-50%);width:300px;max-width:calc(100vw - 630px);padding:12px 14px;background:#243b50f5;border-color:#c8b78e;backdrop-filter:none}
+#game .event-notice strong{font-size:14px;padding-right:20px}
+#game .event-notice p{font-size:12px;line-height:1.6;-webkit-line-clamp:2}
+#game .notice-kicker{font-size:11px}
+#game .event-notice .primary-button{font-size:12px!important}
+#game .bottom-note{left:20px;right:18px;bottom:7px;display:flex;align-items:center;justify-content:flex-end;gap:12px;z-index:25;line-height:1.5;pointer-events:none}
+#game .bottom-note button{margin:0;font-size:11px;letter-spacing:0;min-height:27px}
+#game .bottom-note span{font-size:inherit;margin:0;letter-spacing:0}
+#game .bottom-note>span{display:none}
+.more-menu{position:relative;pointer-events:auto;display:inline-block}
+.more-menu>summary{list-style:none;display:flex;gap:6px;align-items:center;min-height:27px;color:#e4d7b8;font-size:11px;cursor:pointer;padding:3px 0}
+.more-menu>summary::-webkit-details-marker{display:none}
+.more-menu-content{position:absolute;right:0;bottom:calc(100% + 10px);width:210px;display:grid;gap:3px;padding:9px;background:#20364a;border:1px solid #bcb58b77;border-radius:9px;box-shadow:0 7px 24px #0f213d80;max-height:65dvh;overflow:auto}
+#game .more-menu-content button{text-align:left;display:flex;align-items:center;gap:8px;width:100%;padding:8px 9px;min-height:36px;border-radius:5px;color:#e9e5d0;font-size:12px}
+#game .more-menu-content button:hover{background:#9db1a61b}
+
+/* Need detail views use the existing dialog and retain the same reading rhythm. */
+.needs-overview{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px;color:#c6d4cb;font-size:12px;line-height:1.6}
+.needs-overview p{margin:0}
+.needs-overview strong{color:#efdbab;font-weight:500}
+.needs-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.need-row{display:grid;grid-template-columns:48px minmax(0,1fr) 18px;align-items:center;gap:11px;min-width:0;text-align:left;padding:12px;background:#2b4357;border:1px solid #aaba9c55;border-radius:8px;color:#f1e7cd}
+.need-row>svg:first-child{width:46px;height:57px;display:block;image-rendering:pixelated}
+.need-row>svg.ui-icon:last-child{width:18px;height:18px;color:#cdbd95}
+.need-row>div{min-width:0}
+.need-row h3{font-size:13px!important;line-height:1.45;margin:0 0 4px!important;color:#f0dfb6!important}
+.need-row p{font-size:12px;line-height:1.6;margin:0 0 5px;color:#c5d3ca;overflow-wrap:anywhere}
+.need-row>span:last-child{color:#cdbd95}
+.need-row:hover{background:#345169;border-color:#e0c88d}
+.need-state{display:inline-flex;align-items:center;gap:4px;font-size:11px;line-height:1.5;color:#becfc9}
+.need-state[data-status="confirmed"]{color:#edcf92}
+.need-state[data-status="in_progress"]{color:#b8d6e4}
+.need-state[data-status="review"]{color:#f2d79c}
+.need-state[data-status="improved"]{color:#bcd7ac}
+.need-state[data-status="partial"]{color:#efb894}
+.need-relation{display:grid;gap:6px;margin:14px 0;padding:12px 14px;border-left:3px solid #b8ca9f;background:#b9c5ab0b;border-radius:0 6px 6px 0}
+.need-relation>.need-match{justify-self:start}
+.need-relation p{margin:0;font-size:12px;line-height:1.65;color:#c8d4ca}
+.need-status-strip{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:13px 0;font-size:11px;color:#bdcec6}
+.need-status-strip>span{display:inline-flex;align-items:center;gap:5px}
+.need-status-strip .is-current,.need-status-strip [aria-current="step"]{color:#f0d39a}
+.need-status-strip .is-complete{color:#bdd5af}
+
+#game.is-placing .focus-panel{display:none}
+#game.is-placing .camera-controls{bottom:37px;max-width:calc(100vw - 40px)}
+#game.is-placing .placement-panel{bottom:91px;max-height:calc(100dvh - 190px);overflow:auto;backdrop-filter:none}
+#game.ui-collapsed .focus-panel{display:block}
+#game.ui-collapsed .focus-milestone,#game.ui-collapsed .focus-next{display:none}
+#game.ui-collapsed .focus-panel{width:260px}
+#game.ui-collapsed .camera-controls{bottom:49px;max-width:calc(100vw - 40px)}
+#game.ui-collapsed .mailbox-button{left:20px;right:auto;bottom:51px}
+
+@media(max-width:1150px) and (min-width:761px){
+  #game .brand h1{font-size:26px}
+  #game .brand .edition{font-size:8px}
+  #game .resource-bar{left:195px;right:228px;gap:8px;padding:7px 9px}
+  #game .resources{gap:11px}
+  #game .resource{min-width:48px}
+  #game .resource strong{font-size:15px}
+  #game .resource em{display:none}
+  #game .time-controls{padding-left:7px}
+  #game .focus-panel,#game .world-feed{left:16px;width:246px}
+  #game .focus-panel{padding:13px}
+  #game .focus-title h2{font-size:16px}
+  #game .neighbour-dock{right:14px;width:206px}
+  #game .neighbour-chip svg{height:31px}
+  #game .hand-dock{left:278px;right:235px}
+  #game .hand-cards{justify-content:flex-start}
+  #game .hand-cards .play-card{width:146px;flex-basis:146px}
+  #game .camera-controls{max-width:calc(100vw - 550px)}
+  #game .event-notice{max-width:calc(100vw - 552px);width:280px}
+}
+@media(max-height:760px) and (min-width:761px){
+  #game .focus-panel{top:93px;padding:11px 13px}
+  .focus-person{margin-top:8px}
+  .focus-next{margin-top:7px;font-size:11px}
+  .focus-actions{margin-top:8px}
+  .focus-milestone{margin-top:8px;padding-top:7px}
+  #game .world-feed{top:auto;bottom:226px;max-height:max(60px,calc(100dvh - 640px))}
+  #game .neighbour-dock{top:93px;max-height:calc(100dvh - 140px)}
+  #game .neighbour-list{gap:4px}
+  #game .neighbour-chip svg{height:27px}
+  #game .neighbour-chip span{font-size:9px}
+  #game .hand-cards .play-card{min-height:157px}
+  #game .hand-cards .card-art{height:35px}
+  #game .camera-controls{bottom:285px}
+}
+@media(max-height:650px) and (min-width:761px){#game .world-feed{display:none}}
+
+/* Small screens stack information in real grid rows, leaving the centre for play. */
+@media(max-width:760px){
+  #game.game{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:40px 48px auto auto minmax(0,1fr) auto;gap:7px;padding:9px 10px 38px;align-content:stretch}
+  #game .brand{position:relative;grid-column:1;grid-row:1;left:auto;top:auto;height:40px;align-self:start;min-width:0;width:max-content;z-index:12}
+  #game .brand h1{font-size:25px;line-height:1;margin:4px 0 0;letter-spacing:-.7px}
+  #game .brand .edition{font-size:8px;letter-spacing:0;max-width:135px}
+  #game .play-controls{top:10px;right:10px;gap:2px;padding:2px;max-width:none}
+  #game .play-controls button{padding:5px 6px;min-height:31px;min-width:26px;font-size:11px}
+  #game .play-controls #language-toggle{font-size:11px}
+  #game .resource-bar{position:relative;grid-column:1;grid-row:2;left:auto;right:auto;top:auto;transform:none;max-width:none;min-width:0;width:100%;gap:5px;justify-content:space-between;padding:6px 9px;border-radius:8px;z-index:15}
+  #game .resources{gap:12px;flex:1;justify-content:space-around}
+  #game .resource{min-width:0;gap:0}
+  #game .resource small{font-size:10px;white-space:nowrap}
+  #game .resource strong{font-size:14px;line-height:1.5}
+  #game .resource em{display:none}
+  #game .resource-glyph .ui-icon{width:14px;height:14px}
+  #game .time-controls{padding-left:7px;gap:3px}
+  #game .time-controls #clock{font-size:10px;max-width:50px;line-height:1.3;white-space:normal;text-align:center}
+  #game .time-controls button{min-height:31px;min-width:27px;padding:4px}
+  #game .focus-panel,#game.ui-collapsed .focus-panel{position:relative;grid-column:1;grid-row:3;left:auto;right:auto;top:auto;bottom:auto;width:auto;min-width:0;margin:0;padding:10px 12px;border-radius:9px}
+  .focus-heading{font-size:11px}
+  .focus-heading button{min-height:25px;padding:2px 0}
+  .focus-person{margin-top:6px;gap:9px}
+  .focus-avatar{width:37px;height:43px;flex-basis:37px;border:0;background:transparent}
+  .focus-avatar svg{width:36px;height:44px}
+  .focus-title h2{font-size:16px;line-height:1.4;margin:0 0 2px}
+  .focus-title>span{font-size:11px;line-height:1.4}
+  .focus-next{font-size:11px;line-height:1.5;margin-top:6px}
+  .focus-actions{margin-top:8px;gap:6px}
+  .focus-actions .primary-button{min-height:35px;padding:7px 9px;font-size:12px!important}
+  .focus-actions .secondary-button{min-height:35px;padding:7px 9px;font-size:11px!important}
+  .focus-milestone{margin-top:7px;padding-top:6px;font-size:10px;line-height:1.5}
+  #game .neighbour-dock{position:relative;grid-column:1;grid-row:4;display:block;left:auto;right:auto;top:auto;bottom:auto;width:auto;max-height:none;overflow:visible;padding:8px 10px;border-radius:8px;margin:0;z-index:15}
+  #game .neighbour-dock .dock-heading,#game .neighbour-list{display:none}
+  #game .objectives-new{padding:0}
+  #game #metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  #game .metric-row{grid-template-columns:1fr;gap:3px;padding:0;border:0;min-width:0;text-align:center}
+  #game .metric-row span{font-size:11px;line-height:1.35;overflow-wrap:anywhere}
+  #game .metric-row span .ui-icon{width:13px;height:13px;vertical-align:-2px;margin-right:2px}
+  #game .metric-row strong{font-size:14px;line-height:1.3}
+  #game .metric-row progress{height:4px;margin:2px 0 0}
+  #game .stability{font-size:10px;line-height:1.35;padding-top:5px;text-align:center}
+  #game .rulebook-link{display:none}
+  #game .world-feed,#game .living-guide,#game .time-state{display:none}
+  #game .hand-dock{position:relative;grid-column:1;grid-row:6;left:auto;right:auto;top:auto;bottom:auto;width:auto;min-width:0;margin:0;align-self:end;z-index:16}
+  #game .hand-heading{padding:0 2px 4px;gap:6px}
+  #game .hand-heading h2{font-size:11px;line-height:1.3}
+  #game .hand-heading small{display:none}
+  #game .library-opener{font-size:11px;padding:6px 9px;min-height:32px;background:#213a50ee}
+  #game .hand-cards{justify-content:flex-start;gap:7px;padding:3px 1px 2px;align-items:stretch;scrollbar-width:none}
+  #game .hand-cards::-webkit-scrollbar{display:none}
+  #game .hand-cards .play-card{display:grid;grid-template-columns:38px minmax(0,1fr);gap:2px 7px;width:174px;flex:0 0 174px;min-height:92px;padding:7px;border-radius:7px}
+  #game .hand-cards .play-card .card-category,#game .hand-cards .play-card .card-pip{display:none}
+  #game .hand-cards .play-card .card-art{grid-column:1;grid-row:1/4;margin:0;height:53px;align-self:center;border-radius:4px}
+  #game .hand-cards .play-card h3{grid-column:2;min-height:0;font-size:12px;line-height:1.4;margin:0}
+  #game .hand-cards .play-card .card-fees{grid-column:2;font-size:10px;line-height:1.5;gap:3px}
+  #game .hand-cards .play-card .need-match{grid-column:1/-1;font-size:10px;margin:3px 0 0;padding:2px 4px;justify-self:start}
+  #game .hand-cards .play-card .card-status{display:none}
+  #game .mailbox-button,#game.ui-collapsed .mailbox-button{left:10px;right:auto;top:auto;bottom:197px;width:82px;min-height:80px;padding:0;gap:3px}
+  #game .mailbox-envelope{width:75px;height:49px}
+  #game .mail-envelope-flap{height:30px}
+  #game .mail-envelope-seal{width:18px;height:18px;left:29px;top:23px;font-size:6px}
+  #game .mail-envelope-paper{left:7px;right:7px;height:42px;padding:5px 7px}
+  #game .mailbox-caption strong{font-size:10px}
+  #game .mailbox-caption small{display:none!important}
+  #game .mailbox-button .mailbox-count{right:1px;top:-6px;min-width:20px;height:20px;font-size:10px}
+  #game .camera-controls,#game.ui-collapsed .camera-controls{left:auto;right:10px;bottom:198px;transform:none;max-width:calc(100vw - 110px);overflow-x:auto;gap:1px;padding:3px;scrollbar-width:none;white-space:nowrap;display:flex}
+  #game .camera-controls button{font-size:11px;min-width:26px;min-height:29px;padding:4px;flex-shrink:0}
+  #game .camera-controls #overview-button{display:none}
+  #game .event-notice{left:auto;right:10px;top:auto;bottom:244px;transform:none;width:min(260px,calc(100vw - 112px));min-width:0;max-width:none;max-height:190px;overflow:auto;padding:10px;z-index:22}
+  #game .event-notice strong{font-size:13px;margin:4px 0}
+  #game .event-notice p{font-size:11px;line-height:1.5;margin:5px 0 8px}
+  #game .event-notice .notice-kicker{font-size:10px}
+  #game .event-notice .primary-button{font-size:11px!important;padding:7px 9px}
+  #game .bottom-note{left:10px;right:10px;bottom:5px;gap:12px;justify-content:flex-end;flex-wrap:nowrap}
+  #game .bottom-note button,.more-menu>summary{font-size:10px;min-height:28px}
+  .more-menu-content{width:208px}
+  #game .more-menu-content button{font-size:12px;min-height:38px}
+  #game.is-placing .focus-panel,#game.is-placing .neighbour-dock,#game.is-placing .hand-dock{display:none}
+  #game.is-placing .camera-controls{bottom:46px;left:10px;right:auto;max-width:calc(100vw - 20px)}
+  #game.is-placing .placement-panel{bottom:92px;max-height:calc(100dvh - 205px);width:calc(100vw - 20px)}
+  #game.ui-collapsed .neighbour-dock{display:block}
+  #game.ui-collapsed .focus-person{margin-top:5px}
+  #game.ui-collapsed .focus-actions{margin-top:6px}
+  .needs-list{grid-template-columns:1fr;gap:8px}
+  .need-row{padding:10px;gap:10px;grid-template-columns:43px minmax(0,1fr) 16px}
+  .need-row>svg:first-child{width:42px;height:51px}
+  .need-row h3{font-size:13px!important}
+  .need-row p{font-size:12px}
+}
+@media(max-width:760px) and (max-height:720px){
+  #game.game{gap:5px;grid-template-rows:36px 44px auto auto minmax(0,1fr) auto;padding-top:7px;padding-bottom:35px}
+  #game .brand h1{font-size:23px}
+  #game .play-controls{top:8px}
+  #game .focus-panel,#game.ui-collapsed .focus-panel{padding:8px 11px}
+  .focus-person{margin-top:3px}
+  .focus-avatar{height:36px}
+  .focus-avatar svg{height:38px;width:31px}
+  .focus-title h2{font-size:15px}
+  .focus-next{margin-top:4px}
+  .focus-actions{margin-top:5px}
+  .focus-actions .primary-button{min-height:32px;padding:6px 9px}
+  .focus-milestone{margin-top:5px;padding-top:4px}
+  #game .neighbour-dock{padding:6px 9px}
+  #game .stability{padding-top:3px}
+  #game .hand-cards{display:none}
+  #game .hand-heading{padding-bottom:0}
+  #game .mailbox-button,#game.ui-collapsed .mailbox-button{bottom:91px;min-height:73px}
+  #game .camera-controls,#game.ui-collapsed .camera-controls{bottom:92px}
+  #game .event-notice{bottom:137px;max-height:155px}
+}
+@media(max-width:360px){
+  #game .brand h1{font-size:23px}
+  #game .brand .edition{font-size:7px;max-width:120px}
+  #game .play-controls button{font-size:10px;padding:4px 5px;min-width:24px}
+  #game .resources{gap:6px}
+  #game .resource-bar{padding:5px 7px}
+  #game .resource small{font-size:9px}
+  #game .resource strong{font-size:13px}
+  #game .time-controls{padding-left:5px}
+  #game .time-controls #clock{font-size:9px;max-width:43px}
+  #game .time-controls button{min-width:25px;padding:3px}
+  .focus-title h2{font-size:15px}
+  #game .metric-row span{font-size:10px}
+  #game #metrics{gap:7px}
+  #game .bottom-note{gap:10px}
+}

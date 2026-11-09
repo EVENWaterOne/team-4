@@ -1,0 +1,95 @@
+/* One clear conversation action beside the retained walkable room. */
+.year-talk-panel{min-width:0;color:#f0e8d6;font:14px/1.65 "Segoe UI","Microsoft YaHei",sans-serif}
+.year-talk-heading{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px}
+.year-talk-heading h3{margin:3px 0 0;color:#f1d398;font-size:22px;line-height:1.4}
+.year-talk-heading>div>span{font-size:11px;color:#becfc7}
+.year-talk-link{border:0;background:transparent;color:#ddc797;padding:4px 0;font:inherit;font-size:11px;min-height:32px}
+.year-talk-transcript{display:grid;gap:12px;max-height:330px;overflow-y:auto;overscroll-behavior:contain;margin-bottom:14px;scrollbar-width:thin;scrollbar-color:#bca77e66 transparent}
+.year-talk-idle{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;min-height:142px;border:1px solid #bca77e33;border-radius:10px;background:#8caaa00b;color:#c4d1c8;font-size:14px}
+.year-talk-idle svg{width:38px;height:38px;color:#d9c48f;opacity:.8}
+.year-talk-sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.year-talk-history{display:block;margin:-7px auto 8px}
+.year-talk-welcome{padding:24px 17px;background:#8caaa00e;color:#c4d1c8;border:1px dashed #91a28b55;border-radius:8px;font-size:14px;line-height:1.8;margin:0}
+.year-talk-exchange{display:grid;gap:6px}
+.year-talk-player{font-size:12px;color:#d0ded3;line-height:1.7;margin:0}
+.year-talk-player>span{display:block;color:#aebfb4;font-size:11px}
+.year-talk-reply{padding:15px 17px;border-radius:8px;background:#eddfbf;color:#304353}
+.year-talk-reply>span{font-size:11px;color:#796440}
+.year-talk-reply p{margin:5px 0 0;font-size:15px;line-height:1.85;overflow-wrap:anywhere}
+.year-talk-scene{margin:0!important;padding:0!important;border:0!important;color:#aebfb6;font-size:11px}
+.year-talk-scene summary{font-size:11px;color:#aebfb6}
+.year-talk-scene p{margin:4px 0 0;line-height:1.7}
+.year-talk-known{display:inline-flex;align-items:center;gap:7px;color:#c8dec1;background:#91b38a18;border:1px solid #91b38a33;border-radius:99px;padding:5px 10px;font-size:11px;margin:1px 0 12px}
+.year-talk-primary{display:flex!important;width:100%;min-height:46px!important;align-items:center;justify-content:center;font-size:15px!important;line-height:1.5;white-space:normal}
+.year-talk-primary:disabled{opacity:.55}
+.year-talk-primary svg{width:20px;height:20px;margin-right:9px}
+.year-talk-caption{margin:11px 0 0;font-size:11px;line-height:1.7;color:#aebfb6}
+.year-talk-followup{border-top:1px solid #a5ac8c44!important;margin-top:17px!important;padding-top:12px!important;color:#c4d0c5;font-size:12px}
+.year-talk-followup>summary{font-size:12px;color:#dbc797}
+.year-talk-followup form{margin-top:10px}
+.year-talk-followup label{display:block;color:#ccd8cd;font-size:12px;margin-bottom:6px}
+.year-talk-followup textarea{display:block;box-sizing:border-box;width:100%;min-height:68px;max-height:160px;resize:vertical;padding:9px 11px;border:1px solid #8b9b8877;border-radius:6px;background:#162d3f;color:#f1ead6;font:inherit;font-size:14px;line-height:1.6}
+.year-talk-send{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-top:8px}
+.year-talk-send>span{font-size:11px;color:#b7c7bd}
+.year-talk-send button{min-height:36px!important;font-size:12px!important}
+.year-talk-error{padding:11px 13px;margin:10px 0;border:1px solid #c1947266;border-radius:6px;background:#ad6e4816;color:#efc7aa;font-size:12px}
+.year-talk-error p{margin:0 0 6px;overflow-wrap:anywhere}
+.year-talk-error>div{display:flex;gap:7px;flex-wrap:wrap}
+.year-talk-error button{font-size:12px!important;min-height:36px!important}
+.year-settings{font-size:13px;line-height:1.8;color:#d3dfd2}
+.year-settings>p{margin:0 0 15px}
+.year-settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.year-settings-grid label{display:grid;gap:5px;color:#ddcba9;font-size:12px}
+.year-settings-wide{grid-column:1/-1}
+.year-settings input,.year-settings select{box-sizing:border-box;width:100%;min-width:0;min-height:40px;padding:8px 10px;background:#162d3e;color:#efe6d0;border:1px solid #8f9c8877;border-radius:6px;font:inherit;font-size:14px}
+.year-settings .year-settings-caption{font-size:11px;color:#acbeb2;margin:13px 0}
+.year-modes{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.year-mode{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;box-sizing:border-box;min-height:150px;padding:20px 14px 16px;border:2px solid #8f9c8866;border-radius:14px;background:#162d3e;color:#efe6d0;font:inherit;cursor:pointer;transition:border-color .15s,background .15s,transform .15s}
+.year-mode:hover:not(:disabled){transform:translateY(-2px);border-color:#e8cf91}
+.year-mode:focus-visible{outline:2px solid #ffe1a0;outline-offset:3px}
+.year-mode.is-on{border-color:#edcd8b;background:#2f5064;box-shadow:0 0 0 3px #edcd8b33}
+.year-mode:disabled{cursor:not-allowed;opacity:.55}
+.year-mode-icon{display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:#f6ecd4;color:#2b3b48}
+.year-mode-icon svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.year-mode strong{font-size:17px;color:#fff0cc}
+.year-mode small{font-size:12px;line-height:1.5;color:#c1d0c9;text-align:center}
+.year-mode.is-on small{color:#f5dfa8}
+.year-mode-check{position:absolute;top:10px;right:10px;width:22px;height:22px;border-radius:50%;border:1.5px solid #8f9c8899}
+.year-mode.is-on .year-mode-check{border:0;background:#edcd8b url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2329394a' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4 8-9'/%3E%3C/svg%3E") center/14px no-repeat}
+.year-settings .year-settings-status{margin:14px 0 0;font-size:12px}
+.year-settings-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.year-settings-actions button{font-size:13px!important;min-height:39px!important}
+#year-talk-settings-status{font-size:12px;color:#e9cc95;margin-top:10px}
+.year-note-session{padding:12px 0!important;margin:0!important;border-top:1px solid #9fab8955!important}
+.year-note-session>summary{font-size:13px;color:#ead19a;margin-bottom:12px}
+.year-notebook .year-talk-exchange{margin:12px 0}
+[data-home-mode="years"].cm-home-panel{padding:14px}
+[data-home-mode="years"] .cm-home-heading{align-items:center;margin-bottom:12px}
+[data-home-mode="years"] .cm-home-heading h3{margin:0;font-size:16px}
+[data-home-mode="years"] .cm-home-quiet{border:0;padding:0;color:#a7bdb1}
+[data-home-mode="years"] .cm-home-nav{margin-top:12px;gap:12px}
+[data-home-mode="years"] .cm-home-nav #cm-home-move-status{flex:1;margin:0;font-size:11px;color:#a8bcb2}
+[data-home-mode="years"] .cm-home-exit{font-size:12px;white-space:nowrap}
+[data-home-mode="years"] .cm-home-pad{grid-template-columns:repeat(3,27px);grid-template-rows:repeat(2,27px);gap:3px}
+[data-home-mode="years"] .cm-home-pad button{font-size:14px}
+[data-home-mode="years"] .cm-home-observation{min-height:0;margin-top:12px;padding:10px 12px}
+[data-home-mode="years"] .cm-home-observation[hidden]{display:none}
+@media(max-width:760px){.year-talk-heading h3{font-size:20px}.year-talk-transcript{max-height:290px}.year-talk-reply{padding:13px 15px}.year-talk-reply p{font-size:15px}.year-talk-primary{min-height:46px!important}.year-talk-followup textarea,.year-settings input,.year-settings select{font-size:16px}.year-settings-grid{grid-template-columns:1fr}.year-settings-wide{grid-column:auto}.year-talk-link{min-height:36px}.year-talk-caption{font-size:11px}}
+/* Conversation starts with the player's words. */
+.year-talk-composer{margin-top:16px;padding:12px;border:1px solid #9aac9270;border-radius:9px;background:#112c3b66;transition:border-color .18s,box-shadow .18s}
+.year-talk-composer:focus-within{border-color:#edcd8b;box-shadow:0 0 0 3px #edcd8b16}
+.year-talk-composer textarea{display:block;width:100%;resize:vertical;min-height:86px;background:transparent;border:0;outline:none;color:#f3ead6;font:inherit;line-height:1.7}
+.year-talk-composer textarea::placeholder{color:#a6bfb4}
+.year-talk-composer .year-talk-send{margin-top:8px;display:flex;align-items:center;justify-content:space-between}
+.year-talk-send svg{width:18px;height:18px}
+.year-talk-suggestions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.year-talk-suggestions button{padding:5px 9px;border:1px solid #9aac9240;border-radius:14px;background:#aac69c0b;color:#b8cbbd;font-size:11px;transition:background .16s,transform .16s}
+.year-talk-suggestions button:hover{background:#edcd8b15;transform:translateY(-1px)}
+.year-talk-bottom{display:flex;justify-content:space-between;gap:8px;margin-top:14px}
+.year-talk-exchange{animation:talk-arrives .24s ease-out both}
+@keyframes talk-arrives{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.year-talk-exchange{animation:none}.year-talk-suggestions button{transition:none}}
+.year-talk-exchange{animation:none}
+@media(prefers-reduced-motion:no-preference){.year-talk-exchange:last-child{animation:talk-arrives .24s ease-out both}.year-talk-send button{transition:opacity .16s,background .16s}.year-talk-send button:disabled{opacity:.55}}
+.year-talk-transcript{max-height:clamp(160px,calc(100dvh - 660px),250px)}
+.year-talk-composer{margin-top:10px;padding:10px}.year-talk-composer textarea{min-height:70px}.year-talk-suggestions{margin-top:8px}.year-talk-bottom{margin-top:10px}
