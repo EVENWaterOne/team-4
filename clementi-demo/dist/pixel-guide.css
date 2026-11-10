@@ -481,6 +481,16 @@
   [data-ui="pixel"] .year-body .yr-guide-page{grid-template-columns:minmax(170px,230px) minmax(0,1fr);gap:22px}
   [data-ui="pixel"] .year-body .yr-guide-art{max-width:none}
 }
+/* desktop: tighter rhythm so each help page fits one sheet at 1440x900 */
+@media (min-width:861px){
+  [data-ui="pixel"] .year-body .yr-guide-copy{gap:10px}
+  [data-ui="pixel"] .year-body .yr-guide-lead{line-height:1.6}
+  [data-ui="pixel"] .year-body .yr-guide-list{gap:4px}
+  [data-ui="pixel"] .year-body .yr-guide-list li{line-height:1.55}
+  [data-ui="pixel"] .year-body .yr-guide .yr-help-step{padding:8px 6px}
+  [data-ui="pixel"] .year-body .yr-guide .yr-help-loop{padding:0 6px 4px 0}
+  [data-ui="pixel"] .year-body .yr-guide-tones{grid-template-columns:repeat(auto-fit,minmax(122px,1fr))}
+}
 /* phones: one column, and the whole sheet scrolls (picture first, then the text) */
 @media (max-width:640px){
   [data-ui="pixel"] .year-body .yr-guide-page{display:block;overflow-x:hidden;overflow-y:auto;background-attachment:local;scrollbar-color:var(--px-ink) var(--px-rule)}
