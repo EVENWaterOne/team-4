@@ -6,6 +6,10 @@
    pixel-cards (needs, policy cards, enact, report, urgent, ending), pixel-guide (help, notes, settings, tutorial). */
 
 :root[data-ui="pixel"]{
+  /* Motion: the pixel look lives in shapes and type, not in the frame rate. Movement is smooth;
+     only on/off blinks use steps(1). Set --px-ease to steps(3,end) to get the old frame-by-frame feel. */
+  --px-ease:cubic-bezier(.2,.8,.3,1);      /* one-off moves: quick start, soft landing */
+  --px-ease-loop:cubic-bezier(.45,0,.55,1); /* looping moves: bob, ripple, press */
   /* Ink and navy surfaces (dark slides) */
   --px-ink:#141c2f;          /* deepest: page, text on paper, outlines */
   --px-ink-2:#0c1222;        /* outer outline on dark surfaces */
@@ -82,7 +86,7 @@
 [data-ui="pixel"] .year-body .primary-button,
 [data-ui="pixel"] .year-body .secondary-button,
 [data-ui="pixel"] #entry-flow .flow-button.primary,
-[data-ui="pixel"] .yr-tour .primary-button{border-radius:0;transition:transform .08s steps(2),box-shadow .08s steps(2),background-color .12s}
+[data-ui="pixel"] .yr-tour .primary-button{border-radius:0;transition:transform .08s var(--px-ease),box-shadow .08s var(--px-ease),background-color .12s}
 [data-ui="pixel"] .year-body .primary-button{background:var(--px-gold);color:var(--px-ink);border:2px solid var(--px-ink);box-shadow:4px 4px 0 var(--px-red);font-family:var(--px-font-display);font-weight:400;font-size:24px;letter-spacing:.04em;line-height:1}
 [data-ui="pixel"] .year-body .primary-button:hover:not(:disabled){background:var(--px-gold-2);transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--px-red)}
 [data-ui="pixel"] .year-body .primary-button:active:not(:disabled){transform:translate(3px,3px);box-shadow:1px 1px 0 var(--px-red)}
@@ -122,7 +126,7 @@
 [data-ui="pixel"] .year-body #modal .modal-body>p{color:var(--px-text-dim)}
 [data-ui="pixel"] .year-body #modal .modal-body h3{font-family:var(--px-font-display);font-weight:400;font-size:24px;letter-spacing:.03em;color:var(--px-gold)}
 @media (prefers-reduced-motion:no-preference){
-  [data-ui="pixel"] #modal[open]{animation:px-modal-in .22s steps(4,end)}
+  [data-ui="pixel"] #modal[open]{animation:px-modal-in .22s var(--px-ease)}
   @keyframes px-modal-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 }
 
