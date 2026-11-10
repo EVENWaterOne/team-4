@@ -1,0 +1,9 @@
+{
+  "name": "clementi-web",
+  "private": true,
+  "description": "Public web build of the Clementi game: static files from ../dist plus a DeepSeek proxy in api/.",
+  "scripts": {
+    "build": "node build.cjs",
+    "preview": "node serve.mjs --mock"
+  }
+}
