@@ -1,0 +1,93 @@
+/* Pixel motion trial: everything except the cards (card motion lives in pixel-card-motion.css).
+   Pairs with pixel-motion.js. Same rules as the rest of the pixel UI (docs/pixel-ui.md, motion):
+   the pixel look is in the shapes, not the frame rate. Moves are smooth and short (0.08–0.3s),
+   eased with --px-ease (one-off moves) or --px-ease-loop (loops); steps(1) only for things that
+   blink or switch on. Hard shadows only, no blur or glow, never resting at a fractional scale,
+   and nothing at all under prefers-reduced-motion. Only the rhythm is borrowed from other games. */
+
+/* ================= Flying bits ================= */
+[data-ui="pixel"] .pxfx-layer{position:fixed;inset:0;z-index:2147483000;overflow:visible;pointer-events:none}
+[data-ui="pixel"] .pxfx-bit,
+[data-ui="pixel"] .pxfx-think{position:absolute;left:0;top:0;box-sizing:border-box;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-gold);box-shadow:2px 2px 0 var(--px-ink-2);will-change:transform}
+[data-ui="pixel"] .pxfx-bit.is-stay{background:var(--px-stay)}
+[data-ui="pixel"] .pxfx-bit.is-social{background:var(--px-social)}
+[data-ui="pixel"] .pxfx-bit.is-comfort{background:var(--px-comfort)}
+[data-ui="pixel"] .pxfx-bit.is-down{background:var(--px-red)}
+[data-ui="pixel"] .pxfx-bit.is-gold{background:var(--px-gold)}
+[data-ui="pixel"] .pxfx-bit.is-spark{border-width:0;box-shadow:none;background:var(--px-gold-2)}
+[data-ui="pixel"] .pxfx-bit.is-spark:nth-child(odd){background:var(--px-gold)}
+/* Thought-bubble squares pop in (the script places them with transform, so this uses scale) */
+[data-ui="pixel"] .pxfx-think{border-width:2px;background:var(--px-card);box-shadow:none;animation:pxfx-think-in .12s var(--px-ease) both}
+
+@media (prefers-reduced-motion:no-preference){
+  /* ================= Year report: count item by item ================= */
+  /* While counting, the results and the money row wait their turn in place (no layout shift). */
+  [data-ui="pixel"] .yr-report.pxfx-tally .yr-result:not(.pxfx-in),
+  [data-ui="pixel"] .yr-report.pxfx-tally .yr-result-effects>span:not(.pxfx-hit),
+  [data-ui="pixel"] .yr-report.pxfx-tally .yr-money:not(.pxfx-in),
+  [data-ui="pixel"] .yr-report.pxfx-tally .yr-report-goal:not(.pxfx-settled) em{visibility:hidden}
+  [data-ui="pixel"] .yr-report.pxfx-tally .yr-report-delta{animation:none}
+  /* Once counting starts, each landing grows (or shrinks) the bar instead of jumping */
+  [data-ui="pixel"] .yr-report.pxfx-counting :is(.yr-report-base,.yr-report-delta){transition:width .18s var(--px-ease),left .18s var(--px-ease)}
+  /* A result slides in from the left, its hard shadow growing as it lands */
+  [data-ui="pixel"] .yr-report.pxfx-tally .yr-result.pxfx-in{animation:pxfx-step-in .2s var(--px-ease) both}
+  /* An effect chip punches out before its bit leaves */
+  [data-ui="pixel"] .yr-report.pxfx-tally .yr-result-effects>span.pxfx-hit{animation:pxfx-punch .18s var(--px-ease) both}
+  /* The goal row ticks each time a bit lands: number hops, the bar's growing end flashes */
+  [data-ui="pixel"] .yr-report.pxfx-tally .yr-report-goal.pxfx-bump>strong{animation:pxfx-hop .16s var(--px-ease)}
+  [data-ui="pixel"] .yr-report.pxfx-tally .yr-report-goal.pxfx-bump .yr-report-delta{animation:pxfx-flash .16s var(--px-ease)}
+  [data-ui="pixel"] .yr-report.pxfx-tally .yr-report-goal.pxfx-settled em{animation:pxfx-pop .2s var(--px-ease) both}
+  [data-ui="pixel"] .yr-report.pxfx-tally .yr-money.pxfx-in{animation:pxfx-rise .2s var(--px-ease) both}
+  /* Crossing 70: the row blinks gold three times (a blink, so steps) and the 70 mark turns gold */
+  [data-ui="pixel"] .yr-report .yr-report-goal.pxfx-goal{animation:pxfx-goal .54s steps(1,end) both}
+  [data-ui="pixel"] .yr-report .yr-report-goal.pxfx-goal .yr-report-track b{background:var(--px-gold-dk);transition:background-color .2s var(--px-ease)}
+  [data-ui="pixel"] .yr-report .yr-report-goal.pxfx-goal .yr-report-track b small{color:var(--px-gold-dk);transition:color .2s var(--px-ease)}
+
+  /* ================= Openness meter ================= */
+  /* The cell holds dark while the bit flies (about 0.35s), then lights white and eases to gold */
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-trust-bar i.is-rising.pxfx-await{animation:pxfx-seg .62s linear both;animation-delay:var(--d,0s)}
+  /* Full trust: the meter hops twice and its label pops */
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-trust.pxfx-full .year-talk-trust-bar{animation:pxfx-hop2 .3s .1s var(--px-ease-loop)}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-trust.pxfx-full small{animation:pxfx-pop .2s .28s var(--px-ease) both}
+
+  /* ================= Need quote and need-found card ================= */
+  /* The highlight sweeps character by character: each one lights pale gold, lifts 2px, settles gold */
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-clue.pxfx-sweep{background:transparent;box-shadow:none;animation:none;color:inherit}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-clue.pxfx-sweep .pxfx-ch{position:relative;background-color:var(--px-gold);box-shadow:inset 0 -2px 0 var(--px-gold-dk);color:var(--px-ink);animation:pxfx-ch calc(var(--per) * 5) var(--px-ease) both;animation-delay:calc(var(--k) * var(--per))}
+  /* The card waits for the sweep, then stamps down: lifted with a long shadow, pressed past, settled */
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-found.pxfx-wait{visibility:hidden}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-found.pxfx-stamp{animation:pxfx-stamp .28s var(--px-ease) both}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-found.pxfx-stamp .year-talk-found-where{animation:pxfx-pop .2s .18s var(--px-ease) both}
+
+  /* ================= Room cursor and route ================= */
+  /* The script glides the cursor from the last cell; the brackets only open a touch and close as
+     they land, instead of zooming in from far out. The breath stays a blink (steps). */
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor-brackets{animation:pxfx-bracket .14s var(--px-ease),px-room-breathe 1s .14s steps(1,end) infinite;transition:scale .08s var(--px-ease)}
+  /* Pressing squeezes the brackets at once, before the click lands; a separate property, so the
+     looping breath is not restarted */
+  [data-ui="pixel"] .year-body #modal.home-modal #cm-home-map[data-pxfx-press] .cm-home-cursor-brackets{scale:.88;transition-duration:.05s}
+  /* Route dots pop in one after another, about 18ms apart */
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-route-dot{animation:cm-dot-in .14s calc(var(--i,0) * 18ms) var(--px-ease) both}
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-route-stand{animation:cm-dot-in .14s calc(var(--i,0) * 18ms) var(--px-ease) both,pxfx-bracket .2s calc(var(--i,0) * 18ms + .1s) var(--px-ease)}
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-route.is-going .cm-home-route-dot{animation:none}
+}
+
+@keyframes pxfx-think-in{from{opacity:0;scale:.4}to{opacity:1;scale:1}}
+@keyframes pxfx-step-in{from{opacity:0;transform:translateX(-12px);box-shadow:0 0 0 var(--px-blue)}to{opacity:1;transform:none}}
+@keyframes pxfx-punch{0%{transform:translate(-2px,-3px);box-shadow:3px 3px 0 var(--px-ink)}45%{transform:translate(1px,1px);box-shadow:0 0 0 var(--px-ink)}100%{transform:none}}
+@keyframes pxfx-hop{0%{transform:translateY(-3px)}100%{transform:none}}
+@keyframes pxfx-hop2{0%,50%,100%{transform:none}25%{transform:translateY(-3px)}75%{transform:translateY(-2px)}}
+@keyframes pxfx-flash{0%{background:var(--px-text)}100%{}}
+@keyframes pxfx-pop{0%{transform:translateY(4px);opacity:0}60%{transform:translateY(-1px);opacity:1}100%{transform:none;opacity:1}}
+@keyframes pxfx-rise{from{transform:translateY(6px);opacity:0}to{transform:none;opacity:1}}
+@keyframes pxfx-goal{0%,33%,67%{background:var(--px-gold-2);box-shadow:inset 0 0 0 2px var(--px-gold-dk)}16%,50%,84%{background:transparent;box-shadow:none}100%{background:transparent;box-shadow:none}}
+/* Held dark until 56% (a hold, so that stretch jumps), then eased: white, pale gold, gold.
+   The curve is --px-ease written out: var() is not read for timing inside @keyframes. */
+@keyframes pxfx-seg{0%{border-color:var(--px-line);background:var(--px-ink-2);box-shadow:none;animation-timing-function:steps(1,end)}56%{border-color:var(--px-ink-2);background:var(--px-text);box-shadow:none;animation-timing-function:cubic-bezier(.2,.8,.3,1)}78%{background:var(--px-gold-2)}100%{background:var(--px-gold)}}
+@keyframes pxfx-ch{0%{top:0;background-color:transparent;box-shadow:none;color:inherit}30%{top:-2px;background-color:var(--px-gold-2)}100%{top:0;background-color:var(--px-gold)}}
+@keyframes pxfx-stamp{0%{transform:translate(-6px,-6px);box-shadow:inset 0 0 0 2px var(--px-ink-2),10px 10px 0 var(--px-gold-dk)}55%{transform:translate(2px,2px);box-shadow:inset 0 0 0 2px var(--px-ink-2),2px 2px 0 var(--px-gold-dk)}100%{transform:none}}
+@keyframes pxfx-bracket{0%{transform:scale(1.1)}100%{transform:none}}
+
+@media (prefers-reduced-motion:reduce){
+  [data-ui="pixel"] .pxfx-layer{display:none}
+}
