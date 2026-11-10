@@ -1,0 +1,85 @@
+/* Pixel motion trial: everything except the cards (card motion lives in pixel-card-motion.css).
+   Pairs with pixel-motion.js. Same rules as the rest of the pixel UI: short (0.06–0.3s per move),
+   stepped, whole pixels, hard shadows only, no blur or glow, never resting at a fractional scale,
+   and nothing at all under prefers-reduced-motion. Only the rhythm is borrowed from other games. */
+
+/* ================= Flying bits ================= */
+[data-ui="pixel"] .pxm-layer{position:fixed;inset:0;z-index:2147483000;overflow:visible;pointer-events:none}
+[data-ui="pixel"] .pxm-bit,
+[data-ui="pixel"] .pxm-think{position:absolute;left:0;top:0;box-sizing:border-box;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-gold);box-shadow:2px 2px 0 var(--px-ink-2);will-change:transform}
+[data-ui="pixel"] .pxm-bit.is-stay{background:var(--px-stay)}
+[data-ui="pixel"] .pxm-bit.is-social{background:var(--px-social)}
+[data-ui="pixel"] .pxm-bit.is-comfort{background:var(--px-comfort)}
+[data-ui="pixel"] .pxm-bit.is-down{background:var(--px-red)}
+[data-ui="pixel"] .pxm-bit.is-gold{background:var(--px-gold)}
+[data-ui="pixel"] .pxm-bit.is-spark{border-width:0;box-shadow:none;background:var(--px-gold-2)}
+[data-ui="pixel"] .pxm-bit.is-spark:nth-child(odd){background:var(--px-gold)}
+[data-ui="pixel"] .pxm-think{border-width:2px;background:var(--px-card);box-shadow:none;animation:pxm-show 1ms steps(1,end) both}
+
+@media (prefers-reduced-motion:no-preference){
+  /* ================= Year report: count item by item ================= */
+  /* While counting, the results and the money row wait their turn in place (no layout shift). */
+  [data-ui="pixel"] .yr-report.pxm-tally .yr-result:not(.pxm-in),
+  [data-ui="pixel"] .yr-report.pxm-tally .yr-result-effects>span:not(.pxm-hit),
+  [data-ui="pixel"] .yr-report.pxm-tally .yr-money:not(.pxm-in),
+  [data-ui="pixel"] .yr-report.pxm-tally .yr-report-goal:not(.pxm-settled) em{visibility:hidden}
+  [data-ui="pixel"] .yr-report.pxm-tally .yr-report-delta{animation:none}
+  /* A result steps forward: in from the left in two hard frames, the shadow landing last */
+  [data-ui="pixel"] .yr-report.pxm-tally .yr-result.pxm-in{animation:pxm-step-in .14s steps(1,end) both}
+  /* An effect chip punches out before its bit leaves */
+  [data-ui="pixel"] .yr-report.pxm-tally .yr-result-effects>span.pxm-hit{animation:pxm-punch .16s steps(1,end) both}
+  /* The goal row ticks each time a bit lands: number hops 2px, the bar's end flashes */
+  [data-ui="pixel"] .yr-report.pxm-tally .yr-report-goal.pxm-bump>strong{animation:pxm-hop .12s steps(1,end)}
+  [data-ui="pixel"] .yr-report.pxm-tally .yr-report-goal.pxm-bump .yr-report-delta{animation:pxm-flash .12s steps(1,end)}
+  [data-ui="pixel"] .yr-report.pxm-tally .yr-report-goal.pxm-settled em{animation:pxm-pop .16s steps(1,end) both}
+  [data-ui="pixel"] .yr-report.pxm-tally .yr-money.pxm-in{animation:pxm-rise .14s steps(1,end) both}
+  /* Crossing 70: the row flashes gold three times and the 70 mark turns gold for good */
+  [data-ui="pixel"] .yr-report .yr-report-goal.pxm-goal{animation:pxm-goal .54s steps(1,end) both}
+  [data-ui="pixel"] .yr-report .yr-report-goal.pxm-goal .yr-report-track b{background:var(--px-gold-dk)}
+  [data-ui="pixel"] .yr-report .yr-report-goal.pxm-goal .yr-report-track b small{color:var(--px-gold-dk)}
+
+  /* ================= Openness meter ================= */
+  /* The cell waits dark while the bit flies, flashes white as it lands, then settles gold */
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-trust-bar i.is-rising.pxm-await{animation:pxm-seg .78s steps(1,end) both;animation-delay:var(--d,0s)}
+  /* Full trust: the meter hops twice and its label pops */
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-trust.pxm-full .year-talk-trust-bar{animation:pxm-hop2 .36s .1s steps(1,end)}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-trust.pxm-full small{animation:pxm-pop .2s .28s steps(1,end) both}
+
+  /* ================= Need quote and need-found card ================= */
+  /* The highlight sweeps character by character: each one lights gold and hops up 2px for a frame */
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-clue.pxm-sweep{background:transparent;box-shadow:none;animation:none;color:inherit}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-clue.pxm-sweep .pxm-ch{position:relative;background:var(--px-gold);box-shadow:inset 0 -2px 0 var(--px-gold-dk);color:var(--px-ink);animation:pxm-ch calc(var(--per) * 3) steps(1,end) both;animation-delay:calc(var(--k) * var(--per))}
+  /* The card waits for the sweep, then stamps down: lifted with a long shadow, pressed past, settled */
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-found.pxm-wait{visibility:hidden}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-found.pxm-stamp{animation:pxm-stamp .27s steps(1,end) both}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-found.pxm-stamp .year-talk-found-where{animation:pxm-pop .16s .2s steps(1,end) both}
+
+  /* ================= Room cursor and route ================= */
+  /* Brackets open by a pixel and snap shut on each new cell, instead of zooming in */
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor-brackets{animation:pxm-bracket .08s steps(1,end),px-room-breathe 1s .08s steps(1,end) infinite}
+  /* Pressing squeezes the brackets at once (before the click lands); a separate property, so the
+     looping breath is not restarted */
+  [data-ui="pixel"] .year-body #modal.home-modal #cm-home-map[data-pxm-press] .cm-home-cursor-brackets{scale:.88}
+  /* Route dots appear one after another, whole, about 18ms apart */
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-route-dot{animation:pxm-show 1ms calc(var(--i,0) * 18ms) steps(1,end) both}
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-route-stand{animation:pxm-show 1ms calc(var(--i,0) * 18ms) steps(1,end) both,pxm-bracket .1s calc(var(--i,0) * 18ms) steps(1,end)}
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-route.is-going .cm-home-route-dot{animation:none}
+}
+
+@keyframes pxm-show{from{visibility:hidden}to{visibility:visible}}
+@keyframes pxm-step-in{0%{transform:translateX(-12px);box-shadow:0 0 0 var(--px-blue)}50%{transform:translateX(-4px);box-shadow:2px 2px 0 var(--px-blue)}100%{transform:none}}
+@keyframes pxm-punch{0%{transform:translate(-2px,-3px);box-shadow:3px 3px 0 var(--px-ink)}50%{transform:translate(1px,1px);box-shadow:0 0 0 var(--px-ink)}100%{transform:none}}
+@keyframes pxm-hop{0%{transform:translateY(-3px)}50%{transform:translateY(1px)}100%{transform:none}}
+@keyframes pxm-hop2{0%{transform:translateY(-3px)}25%{transform:none}50%{transform:translateY(-2px)}75%,100%{transform:none}}
+@keyframes pxm-flash{0%{background:var(--px-text)}100%{}}
+@keyframes pxm-pop{0%{transform:translateY(4px);opacity:0}40%{transform:translateY(-2px);opacity:1}100%{transform:none;opacity:1}}
+@keyframes pxm-rise{0%{transform:translateY(6px);opacity:0}50%{transform:translateY(-1px);opacity:1}100%{transform:none;opacity:1}}
+@keyframes pxm-goal{0%,33%,67%{background:var(--px-gold-2);box-shadow:inset 0 0 0 2px var(--px-gold-dk)}16%,50%,84%{background:transparent;box-shadow:none}100%{background:transparent;box-shadow:none}}
+@keyframes pxm-seg{0%{border-color:var(--px-line);background:var(--px-ink-2);box-shadow:none}45%{border-color:var(--px-ink-2);background:var(--px-text);box-shadow:none}62%{background:var(--px-gold-2)}100%{background:var(--px-gold)}}
+@keyframes pxm-ch{0%{top:0;background:transparent;box-shadow:none;color:inherit}1%{top:-2px;background:var(--px-gold-2)}34%{top:0;background:var(--px-gold)}100%{top:0}}
+@keyframes pxm-stamp{0%{transform:translate(-6px,-6px);box-shadow:inset 0 0 0 2px var(--px-ink-2),10px 10px 0 var(--px-gold-dk)}33%{transform:translate(2px,2px);box-shadow:inset 0 0 0 2px var(--px-ink-2),2px 2px 0 var(--px-gold-dk)}66%{transform:translate(-1px,-1px);box-shadow:inset 0 0 0 2px var(--px-ink-2),5px 5px 0 var(--px-gold-dk)}100%{transform:none}}
+@keyframes pxm-bracket{0%{transform:scale(1.1)}50%{transform:scale(.96)}100%{transform:none}}
+
+@media (prefers-reduced-motion:reduce){
+  [data-ui="pixel"] .pxm-layer{display:none}
+}

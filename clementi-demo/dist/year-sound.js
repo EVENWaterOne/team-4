@@ -153,7 +153,11 @@
     tour(t){const o=osc('sine',620,t);o.frequency.exponentialRampToValueAtTime(930,t+.08);const g=amp(t,.1,.006,.14);o.connect(g);send(g,sfxBus,.3);o.start(t);o.stop(t+.18);},
     toast(t){const o=osc('sine',440,t),g=amp(t,.07,.004,.08);o.connect(g);g.connect(sfxBus);o.start(t);o.stop(t+.1);},
     win(t){[72,76,79,84,88,91].forEach((m,k)=>bell(t+k*.11,m,.08,sfxBus,.5,(k-2.5)*.15,1.8));[60,64,67,72].forEach(m=>keys(t+.7,m,1.6,.05,sfxBus,.45));},
-    lose(t){[69,67,64,60].forEach((m,k)=>keys(t+k*.22,m,.6,.07,sfxBus,.45));}
+    lose(t){[69,67,64,60].forEach((m,k)=>keys(t+k*.22,m,.6,.07,sfxBus,.45));},
+    // The year report counting up: a short square-wave blip that climbs a pentatonic step each time.
+    tick(t,n){const m=[72,74,76,79,81,84,86,88,91,93,96][Math.max(0,Math.min(10,n|0))],o=osc('square',mtof(m),t),lp=filt('lowpass',2600),g=amp(t,.045,.002,.07);o.connect(lp);lp.connect(g);g.connect(sfxBus);o.start(t);o.stop(t+.1);mallet(t,m+12,.05,sfxBus,.15,0,.25);},
+    // A goal crossing 70 during the count: a bright stacked chord with a little shimmer.
+    goal(t){[72,76,79,84,88].forEach((m,k)=>bell(t+k*.035,m,.085,sfxBus,.45,(k-2)*.2,1.5));keys(t,60,1,.06,sfxBus,.4);const s=noiseSrc(t+.1,.5),hp=filt('highpass',7000),g=amp(t+.1,.035,.02,.45);s.connect(hp);hp.connect(g);send(g,sfxBus,.5);}
   };
   let stepSide=.18,lastPlay={};
   const played=[];
