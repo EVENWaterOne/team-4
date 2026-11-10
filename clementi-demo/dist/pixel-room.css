@@ -1,1 +1,352 @@
-/* pixel-room: see pixel-theme.css for tokens. */
+/* pixel-room: the home visit and the knock at a declined door.
+   A dark slide holds two navy panels: the room, framed like a game window (gold frame, ink ring,
+   blue hard drop) with cream chips on its top wall, and the conversation, modelled on deck slide 9
+   (cream resident bubbles, deep teal lines for you, a gold frame on words you typed, the gold need line,
+   a four-segment openness meter and full-width reply buttons with a coloured tone square).
+   The declined door is a tilted polaroid over a cream speaker card. Tokens: pixel-theme.css.
+   Only visuals change here: the room's size logic (year-room.css) and all markup stay as they are. */
+
+/* ================= Modal header: name, then the blue year tag ================= */
+[data-ui="pixel"] .year-body #modal.home-modal .modal-top{padding:12px 18px 13px}
+[data-ui="pixel"] .year-body #modal.home-modal .modal-top>div:first-child{align-items:center;gap:16px}
+[data-ui="pixel"] .year-body #modal.home-modal .modal-top h2{margin:0;font-size:36px;line-height:1}
+
+/* ================= Room panel ================= */
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-panel.year-home-panel{gap:10px;padding:12px 12px 14px;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-navy);box-shadow:var(--px-panel-shadow)}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-heading{gap:14px;min-height:32px}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-title{align-items:baseline;gap:14px}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-title h3{margin:0;font:400 24px/1.1 var(--px-font-display);letter-spacing:.03em;color:var(--px-gold);text-shadow:1px 1px 0 var(--px-red),2px 2px 0 var(--px-red)}
+[data-ui="pixel"][lang="en"] .year-body #modal.home-modal .cm-home-title h3{font-size:30px;line-height:.95}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-title .cm-home-intro{font-size:12.5px;line-height:1.4;color:var(--px-text-dim)}
+
+/* Stories heard: a dark chip, big gold number over a small total (deck slide 2) */
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-stories{gap:7px;box-sizing:border-box;height:30px;padding:0 10px 0 8px;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-ink);box-shadow:inset 0 0 0 2px var(--px-navy-3),2px 2px 0 var(--px-ink-2);color:var(--px-text-dim);font:400 12px/1 var(--px-font-label);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-stories svg{width:16px;height:16px;color:var(--px-gold)}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-stories-count{display:inline-flex;align-items:baseline;gap:1px;font:400 20px/1 var(--px-font-display);letter-spacing:.02em;color:var(--px-text-dim)}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-stories-count strong{font:400 24px/1 var(--px-font-display);color:var(--px-gold)}
+
+/* ================= The room: a game window ================= */
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-board{border:2px solid var(--px-gold);border-radius:0;background:var(--px-ink);box-shadow:0 0 0 3px var(--px-ink-2),6px 6px 0 3px var(--px-blue)}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-shelf{margin-top:4px}
+/* Walls take the panel navy; the floor art stays warm */
+[data-ui="pixel"] .year-body #modal.home-modal #cm-home-map rect[fill="#354d5d"]{fill:var(--px-navy-2)}
+[data-ui="pixel"] .year-body #modal.home-modal #cm-home-map rect[fill="#748a8b"]{fill:var(--px-line)}
+
+/* Wall tips: cream pixel chips (deck slide 12), each with a coloured icon square; keys are keycaps */
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-caption{gap:10px;color:var(--px-text-ink);font:400 12px/1 var(--px-font-label);letter-spacing:.06em;text-transform:uppercase}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-tip{gap:6px;box-sizing:border-box;height:24px;padding:0 8px 0 2px;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-card);box-shadow:2px 2px 0 var(--px-ink-2)}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-tip svg{flex:0 0 16px;box-sizing:border-box;width:16px;height:16px;padding:2px;background:var(--px-blue);color:#fff;stroke-width:2.6;stroke-linecap:square;stroke-linejoin:miter}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-tip.is-look svg{background:var(--px-gold);color:var(--px-ink)}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-tip.is-talk svg{background:var(--px-teal);color:var(--px-ink)}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-tip.is-keys{gap:4px;padding:0;border:0;background:transparent;box-shadow:none}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-tip kbd{min-width:20px;height:20px;padding:0 4px;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-card);box-shadow:inset 0 -3px 0 var(--px-sand),2px 2px 0 var(--px-ink-2);color:var(--px-text-ink);font:400 12px/1 var(--px-font-label);letter-spacing:0;text-transform:uppercase}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-tip kbd:last-child{margin-left:4px;padding:0 5px}
+
+/* Tile cursor: square brackets in the palette, a square tag with a hard shadow */
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor{color:var(--px-card)}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor.is-look{color:var(--px-gold)}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor.is-talk,
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor.is-here{color:var(--px-teal)}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor.is-exit{color:var(--px-orange)}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor.is-blocked{color:#e0705f}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor-shade{stroke:var(--px-ink-2);opacity:.8}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor-x{stroke-linecap:square}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor-tag{filter:drop-shadow(2px 2px 0 var(--px-ink-2))}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor-tag rect{rx:0;ry:0;stroke:var(--px-ink-2);stroke-width:2}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor-tag svg{stroke:var(--px-ink);stroke-width:2.8;stroke-linecap:square;stroke-linejoin:miter}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor-tag text{font-family:var(--px-font-pixel);font-size:11px;font-weight:400;letter-spacing:0;fill:var(--px-ink)}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-route{color:var(--px-card)}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-route.is-look{color:var(--px-gold)}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-route.is-talk{color:var(--px-teal)}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-route.is-exit{color:var(--px-orange)}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-route-dot{stroke:var(--px-ink-2);stroke-width:2}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-route-stand{stroke-width:3;stroke-linejoin:miter}
+
+/* People and things in the room */
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-person-halo{rx:0;fill:#e9c77b33;stroke:var(--px-gold);stroke-width:2;stroke-dasharray:4 3}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-person-halo.is-ground{fill:#e9c77b3d;stroke:var(--px-gold);stroke-width:2;stroke-dasharray:none}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-resident:hover .cm-home-person-halo,
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-resident:focus-visible .cm-home-person-halo{fill:#e9c77b80;stroke:var(--px-gold-2)}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-you{fill:#4fb3c440;stroke:var(--px-teal);stroke-width:2}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-player{filter:drop-shadow(2px 2px 0 #0c122259)}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-object-ring{rx:0;stroke:var(--px-gold-2);stroke-width:2.5}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-prop.is-heard .cm-home-object-ring{stroke:var(--px-gold);opacity:.7}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-prop.is-hinted .cm-home-object-ring{stroke:var(--px-gold);stroke-width:3;opacity:1}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-story-dot{rx:0;fill:var(--px-gold);stroke:var(--px-ink-2);stroke-width:2}
+
+/* Story bookmarks: empty dashed slots, gold tabs once heard */
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-shelf{gap:6px}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-bookmark{height:28px;gap:5px;padding:0 5px;border:2px dashed var(--px-line);border-radius:0;background:var(--px-ink);color:var(--px-text-dim);font:400 12px/1 var(--px-font-pixel);letter-spacing:.02em}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-bookmark svg{flex:0 0 12px;width:12px;height:12px;fill:none;stroke:var(--px-line);stroke-width:2.4;stroke-linejoin:miter}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-bookmark.is-heard{border:2px solid var(--px-ink-2);background:var(--px-gold);color:var(--px-ink);box-shadow:2px 2px 0 var(--px-gold-dk)}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-bookmark.is-heard svg{fill:var(--px-red);stroke:var(--px-ink-2);stroke-width:2}
+
+/* ================= Conversation column (deck slide 9) ================= */
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-panel{color:var(--px-text);font-family:var(--px-font-body)}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-conversation .year-talk-panel{gap:12px}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-conversation{padding:0 6px 6px 0}
+/* year-room.css lets the transcript give way first when the window is short. For that to happen the
+   panel must be allowed to shrink, and the log may shrink down to its title band plus the transcript's
+   96px minimum (2+38+10+96+12+2), so the reply buttons stay in view at 1152×760. */
+@media (min-width:981px){
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-conversation>.year-talk-panel{min-height:0}
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-conversation .year-talk-panel>.year-talk-log{min-height:160px}
+}
+
+/* Resident card: framed portrait, pixel name, teal event chip, mode tag */
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-conversation .year-talk-event-heading{padding:10px 12px;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-navy);box-shadow:var(--px-panel-shadow)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-avatar>svg{box-sizing:border-box;width:52px;height:52px;padding:2px;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-card);box-shadow:3px 3px 0 var(--px-blue)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-event-heading .year-talk-who{gap:6px}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-event-heading .year-talk-who h3{margin:0;font:400 24px/1.1 var(--px-font-display);letter-spacing:.03em;color:var(--px-gold)}
+[data-ui="pixel"][lang="en"] .year-body #modal.home-modal .year-talk-event-heading .year-talk-who h3{font-size:24px;line-height:1}
+/* room for the Silkscreen mode tag (OFFLINE / DEEPSEEK) at the top right; the chip may run under it */
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-conversation .year-talk-event-heading>.year-talk-who{padding-right:90px}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-conversation .year-talk-event-heading .year-talk-who>.year-talk-event-chip{width:max-content;max-width:calc(100% + 90px)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-event-chip{gap:6px;padding:3px 8px 3px 5px;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-teal-dk);color:var(--px-text);font-size:12px;line-height:1.4;box-shadow:2px 2px 0 var(--px-ink-2)}
+/* the event and the motive wrap onto two lines instead of being cut with an ellipsis */
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-conversation .year-talk-event-chip{display:block;box-sizing:border-box;padding:3px 9px 3px 6px;white-space:normal;overflow:visible}
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-conversation .year-talk-event-chip>span{overflow:visible}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-event-chip svg{display:inline-block;width:14px;height:14px;margin-right:6px;vertical-align:-2px;color:var(--px-gold-2);stroke-width:2.2}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-event-chip i{display:inline-block;width:2px;height:12px;margin:0 7px;vertical-align:-1px;background:#f2ebdd73}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-modetag{padding:4px 6px 3px;border:2px solid var(--px-line);border-radius:0;background:var(--px-ink);color:var(--px-text-dim);font:400 12px/1 var(--px-font-label);letter-spacing:.08em;text-transform:uppercase}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-modetag.is-ai{border-color:var(--px-ink-2);background:var(--px-blue);color:#fff;box-shadow:2px 2px 0 var(--px-blue-dk)}
+
+/* Blocks: navy panels with an ink title band */
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-block{gap:10px;padding:0 12px 12px;border:2px solid var(--px-ink-2);border-radius:0;background-color:var(--px-navy);box-shadow:var(--px-panel-shadow)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-log{background-image:var(--px-ruled-navy);background-position:0 40px}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-log-head,
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-respond-head{box-sizing:border-box;min-height:38px;margin:0 -12px;padding:6px 12px;background:var(--px-ink);border-bottom:2px solid var(--px-ink-2)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-respond-head{padding:5px 8px 5px 12px}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-block-label{gap:7px;color:var(--px-gold);font:400 12px/1 var(--px-font-label);letter-spacing:.12em;text-transform:uppercase}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-block-label svg{flex:0 0 16px;width:16px;height:16px;color:var(--px-gold);stroke-width:2.2}
+
+/* Openness meter: four chunky segments filling gold, a tick before the third */
+/* a narrow column puts the meter on its own line rather than over the label */
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-log-head{flex-wrap:wrap;row-gap:6px}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-log-head .year-talk-trust{flex:1 1 0%;min-width:min-content;gap:7px}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-log-head .year-talk-trust>svg{color:var(--px-gold);stroke-width:2.2}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-log-head .year-talk-trust-bar{flex:0 1 124px;gap:4px;min-width:64px}
+[data-ui="pixel"][lang="en"] .year-body #modal.home-modal .year-talk-log-head .year-talk-block-label{letter-spacing:.04em}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-log-head .year-talk-trust-bar i{box-sizing:border-box;height:14px;border:2px solid var(--px-line);border-radius:0;background:var(--px-ink-2);box-shadow:none;transition:background-color .2s steps(2)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-trust-bar i.is-on{border-color:var(--px-ink-2);background:var(--px-gold);box-shadow:inset 0 -3px 0 var(--px-gold-dk),inset 0 2px 0 var(--px-gold-2)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-trust-bar i.is-mark::after{right:-5px;top:-6px;width:2px;height:22px;background:var(--px-text)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-trust[data-level="5"] .year-talk-trust-bar i{background:var(--px-gold-2);box-shadow:inset 0 -3px 0 var(--px-gold)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-log-head .year-talk-trust small{font:400 12px/1 var(--px-font-pixel);letter-spacing:.04em;white-space:nowrap;color:var(--px-text-dim)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-log-head .year-talk-trust small.is-open{color:var(--px-gold)}
+
+/* Transcript bubbles */
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-log .year-talk-transcript{gap:12px;padding:2px 8px 6px 2px}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-exchange{gap:6px}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-reply{padding:9px 14px 11px;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-card);color:var(--px-text-ink);box-shadow:3px 3px 0 var(--px-ink-2)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-reply>span{display:block;font:400 12px/1.2 var(--px-font-pixel);letter-spacing:.04em;color:var(--px-text-ink-dim)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-reply p{margin:5px 0 0;color:var(--px-text-ink);font-size:14.5px;line-height:1.75}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-exchange.has-clue .year-talk-reply{border-color:var(--px-gold-dk);box-shadow:inset 4px 0 0 var(--px-gold),3px 3px 0 var(--px-gold-dk)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-clue{padding:1px 3px;margin:0 -1px;border-radius:0;background:var(--px-gold);box-shadow:inset 0 -2px 0 var(--px-gold-dk);color:var(--px-ink);font-weight:600;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-exchange .year-talk-player{padding:8px 14px 10px;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-teal-dk);color:var(--px-text);font-size:14.5px;line-height:1.65;box-shadow:3px 3px 0 var(--px-ink-2)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-exchange .year-talk-player>span{margin:0 0 4px;color:#bfe6ec;font:400 12px/1.2 var(--px-font-pixel);letter-spacing:.04em}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-exchange .year-talk-player.is-typed{border-color:var(--px-gold);background:var(--px-teal-dk);color:var(--px-text);box-shadow:0 0 0 2px var(--px-ink-2),3px 3px 0 2px var(--px-ink-2)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-exchange .year-talk-player.is-typed>span{color:var(--px-gold)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-scene summary{display:inline-flex;align-items:center;gap:5px;list-style:none;cursor:pointer;color:var(--px-text-dim);font:400 12px/1.4 var(--px-font-pixel)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-scene summary::-webkit-details-marker{display:none}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-scene summary::before{content:"";width:0;height:0;border-left:5px solid currentColor;border-top:4px solid transparent;border-bottom:4px solid transparent}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-scene[open] summary::before{border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid currentColor;border-bottom:0}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-scene summary:hover{color:var(--px-gold)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-scene p{color:var(--px-text-dim);font-size:12.5px;font-style:italic}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-typing{border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-card);box-shadow:3px 3px 0 var(--px-ink-2)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-typing i{width:6px;height:6px;border-radius:0;background:var(--px-slate)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-error{border:2px solid var(--px-red);border-radius:0;background:#b5483a2e;color:#f6cfc6;box-shadow:3px 3px 0 var(--px-ink-2)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-bottom .year-talk-link{color:var(--px-gold);font:400 12px/1.3 var(--px-font-pixel);text-decoration:underline;text-decoration-style:dashed;text-underline-offset:4px}
+
+/* Need found: gold-framed dark card, gold icon square, "added to Needs" chip */
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-found{border-radius:0;border:2px solid var(--px-gold);background:var(--px-navy-2);color:var(--px-gold-2)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-found.has-need{padding:10px 12px 10px 10px;column-gap:12px;box-shadow:inset 0 0 0 2px var(--px-ink-2),4px 4px 0 var(--px-gold-dk)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-found-icon{box-sizing:border-box;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-gold);color:var(--px-ink);box-shadow:2px 2px 0 var(--px-red)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-found.has-need .year-talk-found-icon{width:36px;height:36px}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-found-icon svg{stroke-width:2.2}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-found-icon i{border-radius:0;background:var(--px-gold-2)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-found.has-need .year-talk-found-label{color:var(--px-gold);font:400 12px/1.2 var(--px-font-label);letter-spacing:.12em;text-transform:uppercase}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-found-need{gap:3px}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-found-need strong{color:var(--px-text);font-size:14px;line-height:1.35}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-found-need span{color:var(--px-gold-2);font-size:13px}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-found-where{padding:4px 7px 3px;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-gold);color:var(--px-ink);font:400 12px/1 var(--px-font-pixel);box-shadow:2px 2px 0 var(--px-gold-dk)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-found.is-waiting{border:2px dashed var(--px-line);background:transparent;color:var(--px-text-dim)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-found.is-waiting .year-talk-found-icon{background:var(--px-navy-3);color:var(--px-text-dim);box-shadow:none}
+
+/* Object card: cream card, ink frame for the picture, pixel name, gold ask button */
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object{gap:14px;padding:12px 44px 12px 12px;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-card);color:var(--px-text-ink);box-shadow:4px 4px 0 var(--px-blue)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-art{box-sizing:border-box;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-paper);background-image:var(--px-ruled-paper);background-size:100% 16px;box-shadow:3px 3px 0 var(--px-ink-2)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-art img{image-rendering:pixelated}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-art svg{stroke:var(--px-slate)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-copy{gap:5px}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-copy .year-talk-block-label{color:var(--px-blue)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-copy .year-talk-block-label svg{color:var(--px-blue)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-copy .year-talk-block-label b{margin-left:6px;padding:3px 6px 2px;border-radius:0;background:var(--px-gold);color:var(--px-ink);font:400 12px/1 var(--px-font-pixel);letter-spacing:.02em;text-transform:none;box-shadow:2px 2px 0 var(--px-gold-dk)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-copy strong{font:400 24px/1.1 var(--px-font-display);letter-spacing:.03em;color:var(--px-ink)}
+[data-ui="pixel"][lang="en"] .year-body #modal.home-modal .year-talk-object-copy strong{font-size:28px;line-height:.95}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-copy p{color:var(--px-text-ink);font-size:13px;line-height:1.65}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-story{color:var(--px-text-ink-dim)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-story summary{color:var(--px-red);font-weight:600}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-ask{gap:8px;min-height:34px;margin-top:6px;padding:6px 12px 6px 8px;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-gold);color:var(--px-ink);box-shadow:3px 3px 0 var(--px-red);font:400 12px/1 var(--px-font-label);letter-spacing:.1em;text-transform:uppercase;transition:transform .08s steps(2),box-shadow .08s steps(2),background-color .1s}
+[data-ui="pixel"][lang="en"] .year-body #modal.home-modal .year-talk-object-ask{letter-spacing:.06em}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-ask svg{stroke-width:2.4}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-ask:hover:not(:disabled){background:var(--px-gold-2);transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--px-red)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-ask:active:not(:disabled){transform:translate(2px,2px);box-shadow:1px 1px 0 var(--px-red)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-ask:disabled{opacity:1;background:var(--px-sand);color:var(--px-slate);box-shadow:3px 3px 0 var(--px-gray)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-close{top:8px;right:8px;width:28px;height:28px;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-navy);color:var(--px-gold);box-shadow:2px 2px 0 var(--px-ink-2)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-close:hover{background:var(--px-red);color:#fff}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-close svg{stroke-width:2.6;stroke-linecap:square}
+
+/* You: role line, back button, composer and reply buttons */
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-role{gap:7px;color:var(--px-text-dim);font:400 12px/1.2 var(--px-font-pixel);letter-spacing:.04em}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-role svg{color:var(--px-gold);stroke-width:2.2}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-respond .year-talk-return{gap:7px;min-height:30px;padding:4px 11px 3px 8px;font:400 12px/1.2 var(--px-font-label);letter-spacing:.1em;text-transform:uppercase}
+[data-ui="pixel"][lang="en"] .year-body #modal.home-modal .year-talk-respond .year-talk-return{letter-spacing:.06em}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-respond .year-talk-return.secondary-button{box-shadow:3px 3px 0 var(--px-blue-dk)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-respond .year-talk-return.primary-button{box-shadow:3px 3px 0 var(--px-red)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-respond .year-talk-return .ui-icon{width:16px;height:16px;stroke-width:2.6}
+
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-respond .year-talk-composer.is-compact{gap:8px;padding:4px 4px 4px 10px;border:2px solid var(--px-line);border-radius:0;background:var(--px-ink-2);box-shadow:inset 2px 2px 0 #00000059;transition:border-color .1s steps(2)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-respond .year-talk-composer.is-compact:focus-within{border-color:var(--px-gold);box-shadow:inset 2px 2px 0 #00000059}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-composer.is-compact .year-talk-own{color:var(--px-gold);font:400 12px/1 var(--px-font-pixel);letter-spacing:.04em}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-composer textarea{color:var(--px-text);font-family:var(--px-font-body);font-size:14px;caret-color:var(--px-gold)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-composer textarea::placeholder{color:#8f99ad;opacity:1}
+/* the composer's gold border already shows focus; no second dashed ring inside it */
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-composer textarea:focus-visible{outline:none!important}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-send-icon{border:2px solid var(--px-ink);border-radius:0;background:var(--px-gold);color:var(--px-ink);box-shadow:2px 2px 0 var(--px-red);transition:transform .08s steps(2),box-shadow .08s steps(2),background-color .1s}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-send-icon svg{stroke-width:2.4;stroke-linejoin:miter}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-send-icon:hover:not(:disabled){background:var(--px-gold-2);transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--px-red)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-send-icon:active:not(:disabled){transform:translate(2px,2px);box-shadow:0 0 0 var(--px-red)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-send-icon:disabled{opacity:1;background:var(--px-navy-3);color:var(--px-gray);box-shadow:none}
+
+[data-ui="pixel"] .year-body #modal.home-modal .cm-home-conversation .year-talk-choice-grid{gap:8px}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-choice{gap:10px;min-height:42px;padding:6px 12px 6px 6px;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-navy-2);color:var(--px-text);font-size:14px;line-height:1.45;box-shadow:inset 0 0 0 2px var(--px-navy-3),3px 3px 0 var(--px-ink-2);transition:transform .08s steps(2),box-shadow .08s steps(2),background-color .1s,border-color .1s}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-choice svg{flex:0 0 30px;box-sizing:border-box;width:30px;height:30px;padding:4px;border:2px solid var(--px-ink-2);background:var(--px-teal);color:var(--px-ink);stroke-width:2.3}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-choice.is-care svg{background:var(--px-red);color:#fff}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-choice.is-form svg{background:var(--px-gray);color:var(--px-ink)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-choice.is-ask svg,
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-choice.is-obj svg{background:var(--px-gold);color:var(--px-ink)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-choice.is-obj{border:2px dashed var(--px-gold)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-choice.is-ready{border-color:var(--px-gold);background:var(--px-navy-3);color:var(--px-gold-2);box-shadow:inset 0 0 0 2px var(--px-gold-dk),3px 3px 0 var(--px-gold-dk)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-choice:hover:not(:disabled){border-color:var(--px-gold);background:var(--px-navy-3);transform:translate(-1px,-1px);box-shadow:inset 0 0 0 2px var(--px-navy-3),4px 4px 0 var(--px-ink-2)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-choice.is-ready:hover:not(:disabled){box-shadow:inset 0 0 0 2px var(--px-gold-dk),4px 4px 0 var(--px-gold-dk)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-choice:active:not(:disabled){transform:translate(2px,2px);box-shadow:inset 0 0 0 2px var(--px-navy-3),1px 1px 0 var(--px-ink-2)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-choice:disabled{opacity:.55;cursor:default}
+
+/* The plain (no event) talk layout, kept consistent in case a visit has no authored event */
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-heading:not(.year-talk-event-heading) h3{font:400 24px/1.1 var(--px-font-display);color:var(--px-gold)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-heading:not(.year-talk-event-heading)>div>span{color:var(--px-text-dim);font:400 12px/1.2 var(--px-font-pixel)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-idle{border:2px dashed var(--px-line);border-radius:0;background:var(--px-ink);color:var(--px-text-dim)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-idle svg{color:var(--px-gold)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-composer:not(.is-compact){border:2px solid var(--px-line);border-radius:0;background:var(--px-ink-2);box-shadow:inset 2px 2px 0 #00000059}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-composer:not(.is-compact):focus-within{border-color:var(--px-gold);box-shadow:inset 2px 2px 0 #00000059}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-suggestions button{border:2px solid var(--px-line);border-radius:0;background:var(--px-navy-2);color:var(--px-text);font-size:12px;transition:transform .08s steps(2)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-suggestions button:hover:not(:disabled){border-color:var(--px-gold);background:var(--px-navy-3);transform:translate(-1px,-1px)}
+
+/* ================= Knock: a declined door ================= */
+[data-ui="pixel"] .year-body #modal.refusal-modal .refusal-event{gap:18px;color:var(--px-text)}
+/* The corridor as a tilted polaroid with a red hard shadow (deck slide 3) */
+[data-ui="pixel"] .year-body #modal.refusal-modal .refusal-stage-wrap{margin:4px 10px 0 6px;padding:10px 10px 26px;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-card);box-shadow:8px 8px 0 var(--px-red);transform:rotate(-1deg)}
+[data-ui="pixel"] .year-body #modal.refusal-modal .refusal-stage{border:2px solid var(--px-ink-2);box-sizing:border-box}
+[data-ui="pixel"] .year-body #modal.refusal-modal .refusal-stage text{font-family:var(--px-font-pixel);font-weight:400}
+[data-ui="pixel"] .year-body #modal.refusal-modal .rf-knock text{font-size:18px;fill:var(--px-red-dk)}
+/* Speaker card: cream card, framed portrait, pixel name */
+[data-ui="pixel"] .year-body #modal.refusal-modal .refusal-card{gap:14px;padding:14px 16px 15px;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-card);color:var(--px-text-ink);box-shadow:4px 4px 0 var(--px-blue)}
+[data-ui="pixel"] .year-body #modal.refusal-modal .refusal-card small{color:var(--px-blue);font:400 12px/1.2 var(--px-font-label);letter-spacing:.1em;text-transform:uppercase}
+[data-ui="pixel"] .year-body #modal.refusal-modal .refusal-card strong{margin-top:4px;color:var(--px-ink);font:400 24px/1.1 var(--px-font-display);letter-spacing:.03em}
+[data-ui="pixel"][lang="en"] .year-body #modal.refusal-modal .refusal-card strong{font-size:28px;line-height:1}
+[data-ui="pixel"] .year-body #modal.refusal-modal .refusal-line{margin:6px 0 0!important;color:var(--px-text-ink)!important;font-size:15px!important;line-height:1.75!important}
+[data-ui="pixel"] .year-body #modal.refusal-modal .refusal-avatar{box-sizing:border-box;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-paper);box-shadow:3px 3px 0 var(--px-ink-2)}
+[data-ui="pixel"] .year-body #modal.refusal-modal .refusal-avatar.is-note{color:var(--px-slate);font:400 24px/1 var(--px-font-pixel);background:var(--px-paper)}
+[data-ui="pixel"] .year-body #modal.refusal-modal .refusal-event[data-mode="note"] .refusal-card{background-color:var(--px-paper);background-image:linear-gradient(90deg,transparent 0 74px,#b5483a73 74px 76px,transparent 76px)}
+[data-ui="pixel"] .year-body #modal.refusal-modal .refusal-event[data-mode="message"] .refusal-card{background:#e3f0ee;box-shadow:inset 6px 0 0 var(--px-teal),4px 4px 0 var(--px-blue)}
+[data-ui="pixel"] .year-body #modal.refusal-modal .refusal-event[data-mode="silent"] .refusal-card{background:var(--px-rule)}
+[data-ui="pixel"] .year-body #modal.refusal-modal .refusal-event[data-mode="silent"] .refusal-card small{color:var(--px-text-ink-dim)}
+/* Footer: red "declined" tag, gold button */
+[data-ui="pixel"] .year-body #modal.refusal-modal .refusal-foot{gap:12px 16px}
+[data-ui="pixel"] .year-body #modal.refusal-modal .refusal-tag{gap:7px;padding:6px 10px 5px 8px;border:0;border-radius:0;background:var(--px-red);color:#fff;box-shadow:3px 3px 0 var(--px-red-dk);font:400 12px/1.3 var(--px-font-pixel);letter-spacing:.04em}
+[data-ui="pixel"] .year-body #modal.refusal-modal .refusal-tag svg{flex:0 0 14px}
+[data-ui="pixel"] .year-body #modal.refusal-modal .refusal-foot .primary-button{min-height:44px;padding:8px 18px}
+
+/* ================= English small labels =================
+   The Chinese pixel face sets ’ · “ ” — full width ("daughter’ s"), so English small labels
+   use Jersey 10 at 16px instead: the same pixel look, about the same width, proper punctuation. */
+[data-ui="pixel"][lang="en"] .year-body #modal.home-modal .cm-home-stories,
+[data-ui="pixel"][lang="en"] .year-body #modal.home-modal .cm-home-caption,
+[data-ui="pixel"][lang="en"] .year-body #modal.home-modal .cm-home-bookmark,
+[data-ui="pixel"][lang="en"] .year-body #modal.home-modal .year-talk-log-head .year-talk-trust small,
+[data-ui="pixel"][lang="en"] .year-body #modal.home-modal .year-talk-reply>span,
+[data-ui="pixel"][lang="en"] .year-body #modal.home-modal .year-talk-exchange .year-talk-player>span,
+[data-ui="pixel"][lang="en"] .year-body #modal.home-modal .year-talk-scene summary,
+[data-ui="pixel"][lang="en"] .year-body #modal.home-modal .year-talk-bottom .year-talk-link,
+[data-ui="pixel"][lang="en"] .year-body #modal.home-modal .year-talk-found-where,
+[data-ui="pixel"][lang="en"] .year-body #modal.home-modal .year-talk-object-copy .year-talk-block-label b,
+[data-ui="pixel"][lang="en"] .year-body #modal.home-modal .year-talk-role,
+[data-ui="pixel"][lang="en"] .year-body #modal.home-modal .year-talk-composer.is-compact .year-talk-own,
+[data-ui="pixel"][lang="en"] .year-body #modal.refusal-modal .refusal-card small,
+[data-ui="pixel"][lang="en"] .year-body #modal.refusal-modal .refusal-tag{font-family:var(--px-font-display);font-size:16px;letter-spacing:.02em;word-spacing:0;text-transform:none}
+[data-ui="pixel"][lang="en"] .year-body #modal.home-modal .cm-home-cursor-tag text{font-family:var(--px-font-display);font-size:14px;letter-spacing:.02em}
+
+/* ================= Short windows ================= */
+@media (max-height:820px){
+  [data-ui="pixel"] .year-body #modal.home-modal .modal-top{padding:9px 18px 10px}
+  [data-ui="pixel"] .year-body #modal.home-modal .modal-top h2{font-size:24px}
+  [data-ui="pixel"][lang="en"] .year-body #modal.home-modal .modal-top h2{font-size:30px}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-art{box-shadow:2px 2px 0 var(--px-ink-2)}
+}
+
+/* ================= Phones ================= */
+@media (max-width:640px){
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-panel.year-home-panel{padding:10px 10px 12px}
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-board{box-shadow:0 0 0 2px var(--px-ink-2),4px 4px 0 2px var(--px-blue)}
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-caption{gap:4px;padding:0 3px}
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-tip{gap:4px;height:22px;padding:0 4px 0 2px;box-shadow:1px 1px 0 var(--px-ink-2)}
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-tip svg{flex-basis:14px;width:14px;height:14px;padding:1px}
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-bookmark{height:26px}
+  [data-ui="pixel"] .year-body #modal.refusal-modal .refusal-stage-wrap{margin:2px 4px 0 2px;padding:6px 6px 16px;box-shadow:5px 5px 0 var(--px-red)}
+  [data-ui="pixel"] .year-body #modal.refusal-modal .refusal-foot .primary-button{width:100%}
+}
+@media (max-width:1240px){
+  /* English: keep "CONVERSATION", the meter and its word on one line in the narrow column */
+  [data-ui="pixel"][lang="en"] .year-body #modal.home-modal .year-talk-log-head .year-talk-trust>svg{display:none}
+}
+@media (max-width:1399px){
+  /* English: "Type your reply, Enter to send" needs the label's width to stay on one line */
+  [data-ui="pixel"][lang="en"] .year-body #modal.home-modal .year-talk-composer.is-compact .year-talk-own{display:none}
+}
+@media (max-width:480px){
+  /* the placeholder already says "in your own words"; give the input the room */
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-composer.is-compact .year-talk-own{display:none}
+}
+
+/* ================= Motion: short and stepped ================= */
+@media (prefers-reduced-motion:no-preference){
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-layout>.cm-home-panel,
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-layout>.cm-home-conversation{animation-duration:.24s;animation-timing-function:steps(4,end)}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-object.is-arriving{animation:px-room-slide .2s steps(4,end) both}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-object.is-arriving .year-talk-object-art img{animation:px-room-pop .24s .1s steps(3,end) both}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-respond .year-talk-choice{animation-duration:.2s;animation-timing-function:steps(3,end)}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-log .year-talk-exchange.is-new .year-talk-player,
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-exchange.is-pending .year-talk-player,
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-log .year-talk-exchange.is-new .year-talk-reply{animation-duration:.2s;animation-timing-function:steps(3,end)}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-trust-bar i.is-rising{animation:px-room-seg .48s steps(1,end) both;animation-delay:var(--d,0s)}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-clue.is-fresh{background:var(--px-gold);animation:px-room-clue .96s steps(1,end) both}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-typing i{animation:px-room-dot .9s steps(1,end) infinite}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-typing i:nth-child(2){animation-delay:.3s}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-typing i:nth-child(3){animation-delay:.6s}
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor-brackets{animation:cm-cursor-in .12s steps(2,end),px-room-breathe 1s .12s steps(1,end) infinite}
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor.is-going .cm-home-cursor-brackets{animation:px-room-breathe .5s steps(1,end) infinite}
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor-tag{animation:cm-tag-in .12s steps(2,end) both}
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-bookmark.is-new{animation:px-room-pop .3s .15s steps(3,end) both}
+  [data-ui="pixel"] .year-body #modal.refusal-modal .refusal-card,
+  [data-ui="pixel"] .year-body #modal.refusal-modal .refusal-foot{animation-duration:.24s;animation-timing-function:steps(3,end)}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-ui="pixel"] .year-body #modal.home-modal :is(.year-talk-choice,.year-talk-object-ask,.year-talk-send-icon,.year-talk-composer,.year-talk-trust-bar i,.year-talk-suggestions button){transition:none}
+  [data-ui="pixel"] .year-body #modal.refusal-modal .refusal-stage-wrap{transform:none}
+}
+@keyframes px-room-slide{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+@keyframes px-room-pop{0%{opacity:0;transform:scale(.6)}60%{opacity:1;transform:scale(1.12)}100%{transform:none}}
+@keyframes px-room-seg{0%{background:var(--px-text)}50%{background:var(--px-gold-2)}100%{background:var(--px-gold)}}
+@keyframes px-room-clue{0%,50%{background:var(--px-text)}25%,75%{background:var(--px-gold-2)}100%{background:var(--px-gold)}}
+@keyframes px-room-dot{0%{background:var(--px-ink);transform:translateY(-2px)}34%,100%{background:var(--px-slate);transform:none}}
+@keyframes px-room-breathe{0%{transform:none}50%{transform:scale(1.06)}}

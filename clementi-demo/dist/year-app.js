@@ -65,7 +65,7 @@
     const gaps=goals.map(([key,,glyph])=>{const g=70-sum.metrics[key];return '<span class="is-'+key+'">'+icon(glyph)+esc(g>0?w('差 '+g,g+' to go'):w('已达标','Reached'))+'</span>';}).join('');
     return '<div class="yr-decade-head"><strong>'+esc(w('七年路线','The seven-year route'))+'</strong><span class="yr-legend">'+goals.map(([key])=>'<span class="is-'+key+'"><i></i>'+esc(goalLabel(key))+'</span>').join('')+'</span>'+btn('decade',icon('x'),'','yr-icon-button','aria-label="'+esc(w('收起七年路线','Close the seven-year route'))+'"')+'</div>'+
       '<div class="yr-decade-chart"><span class="yr-decade-70"><b>70</b></span>'+cols+'</div>'+
-      '<div class="yr-decade-foot"><span>'+esc(w('离 70','To 70'))+'</span>'+gaps+'<span class="yr-flex"></span><span>'+esc(w('还剩','Left'))+' <strong>'+(11-y)+'</strong> '+esc(w('年','years'))+'</span>'+btn('restart',icon('restart')+esc(w('重新开始','Restart')),'','text-button')+'</div>';
+      '<div class="yr-decade-foot"><span>'+esc(w('离 70','To 70'))+'</span>'+gaps+'<span class="yr-flex"></span><span>'+esc(w('还剩','Left'))+' <strong>'+((state.maxYears||7)+1-y)+'</strong> '+esc(w('年','years'))+'</span>'+btn('restart',icon('restart')+esc(w('重新开始','Restart')),'','text-button')+'</div>';
   }
   function goalsHTML(current,shown,preview){
     return goals.map(([key,,glyph])=>{
