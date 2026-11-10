@@ -5,7 +5,9 @@
 ## 发布了什么
 
 - `build.cjs` 只复制 `dist/index.html` 实际加载的文件（以及 three.js 和 downstairs-ai 的许可说明）到 `out/`，不带旧入口、留档 HTML 和美术源文件。
-- 唯一的改动在复制出来的 `year-dialogue.js` 里：main 只在 127.0.0.1/localhost 打开 AI，网页版改成任何 http(s) 网址都走同站的 `/api/*`。原文件不动；这一行在 main 里变了，构建会直接报错提醒。
+- 改动只在复制出来的 `year-dialogue.js` 里，原文件不动：
+  - main 只在 127.0.0.1/localhost 打开 AI，网页版改成任何 http(s) 网址都走同站的 `/api/*`。这一行在 main 里变了，构建会直接报错提醒。
+  - AI 设置面板里"把 deepseek-key.txt 放进文件夹、运行启动游戏.cmd"这类只适用于本机的提示，换成网站的说法，英文界面的错误原因也显示英文。这些文字在 main 里改了的话，构建照常进行，只是保留原文并打印提示。
 - `api/` 是代理，替代 `server.cjs`（`server.cjs` 不能放到公网上）：
   - Key 只从服务器环境变量 `DEEPSEEK_API_KEY` 读，浏览器拿不到。
   - 只接受本站页面发来的请求，只转发游戏自己的两段系统提示词（中文、英文，构建时从 `year-dialogue.js` 提取到 `api/_lib/prompts.mjs`），请求大小和问题长度有上限。
@@ -15,7 +17,7 @@
 
 ## 部署（Vercel）
 
-项目设置：Root Directory 设为 `clementi-demo/web`，Framework 选 Other，开启 "Include files outside the root directory"。构建命令和输出目录写在 `vercel.json` 里。
+项目设置：Root Directory 设为 `clementi-demo/web`，Framework 选 Other，开启 "Include files outside the root directory"。构建命令、输出目录和"不安装依赖"写在 `vercel.json` 里（这个文件夹没有依赖，跳过安装能避免去装仓库根目录那个旧 Vite 项目）。
 
 环境变量：`DEEPSEEK_API_KEY`（必填，建议单独开一个只充少量余额的 Key）、`DEEPSEEK_MODEL`（可选）。没有 Key 时网页照样能玩，对话自动用离线版。
 
@@ -31,4 +33,4 @@ node clementi-demo/web/serve.mjs --mock                 # 假的 DeepSeek 回复
 DEEPSEEK_API_KEY=... node clementi-demo/web/serve.mjs   # 真的 DeepSeek
 ```
 
-然后打开 http://localhost:4173 。
+然后打开 http://localhost:4173 。预览服务只监听本机，也只接受 localhost/127.0.0.1 这个地址。

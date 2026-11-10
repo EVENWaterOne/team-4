@@ -41,6 +41,8 @@ const handlers = {};
 for (const name of ['dialogue', 'ai-check', 'ai-status']) handlers['/api/' + name] = (await import(pathToFileURL(path.join(here, 'api', name + '.mjs')).href)).default;
 
 http.createServer(async (req, res) => {
+  // Local only: refuse other Host names so a web page cannot reach this server through DNS rebinding.
+  if (!['localhost:' + port, '127.0.0.1:' + port, ...String(process.env.EXTRA_HOSTS || '').split(',').filter(Boolean)].includes(req.headers.host)) { res.writeHead(403); return res.end('Forbidden'); }
   const url = new URL(req.url, 'http://' + req.headers.host);
   for (const [k, v] of Object.entries(siteHeaders)) res.setHeader(k, v);
   const handler = handlers[url.pathname];
@@ -59,4 +61,4 @@ http.createServer(async (req, res) => {
   if (!file.startsWith(out + path.sep) || !fs.existsSync(file) || !fs.statSync(file).isFile()) { res.writeHead(404); return res.end('Not found'); }
   res.writeHead(200, { 'content-type': types[path.extname(file)] || 'application/octet-stream', 'cache-control': 'public, max-age=0, must-revalidate' });
   fs.createReadStream(file).pipe(res);
-}).listen(port, () => console.log('http://localhost:' + port + (process.argv.includes('--mock') ? '  (mock DeepSeek)' : '')));
+}).listen(port, process.env.HOST || '127.0.0.1', () => console.log('http://localhost:' + port + (process.argv.includes('--mock') ? '  (mock DeepSeek)' : '')));

@@ -5,7 +5,7 @@ export default {
     if (request.method !== 'POST') return json(405, { error: say('zh', 'method') }, { allow: 'POST' });
     if (!sameOrigin(request)) return json(403, { error: say('zh', 'origin') });
     if (!/^application\/json\b/i.test(request.headers.get('content-type') || '')) return json(415, { error: say('zh', 'bad') });
-    if (Number(request.headers.get('content-length') || 0) > LIMITS.body) return json(413, { error: say('zh', 'tooBig') });
+    if (Number(request.headers.get('content-length') || 0) > LIMITS.bodyBytes) return json(413, { error: say('zh', 'tooBig') });
     const raw = await request.text();
     if (raw.length > LIMITS.body) return json(413, { error: say('zh', 'tooBig') });
     let input;
@@ -18,7 +18,10 @@ export default {
     try {
       return json(200, { text: await dialogue(checked.messages) });
     } catch (error) {
-      if (error instanceof UpstreamError) return json(error.status, { error: say(lang, error.reason) });
+      if (error instanceof UpstreamError) {
+        if (error.reason === 'timeout' || error.reason === 'down') console.error('dialogue', error.reason);
+        return json(error.status, { error: say(lang, error.reason) });
+      }
       console.error('dialogue failed', error?.name);
       return json(502, { error: say(lang, 'down') });
     }

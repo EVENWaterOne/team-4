@@ -8,8 +8,9 @@ const apiKey = () => String(process.env.DEEPSEEK_API_KEY || '').trim();
 
 export const configured = () => !!apiKey();
 
-// Request size caps. A real dialogue request is about 6 KB; the game caps typed questions at 600 characters.
-export const LIMITS = { body: 40000, user: 32000, question: 600 };
+// Request size caps, in characters. A real dialogue request is about 6 KB; the game sends at most the last
+// 6 exchanges and caps typed questions at 600 characters. bodyBytes allows for 4-byte UTF-8 characters.
+export const LIMITS = { body: 40000, bodyBytes: 160000, user: 32000, question: 600 };
 
 const MESSAGES = {
   zh: {
@@ -75,6 +76,7 @@ export function sameOrigin(request) {
 // Per-instance sliding-window limiter. It is a speed bump, not a global quota:
 // the DeepSeek account balance is the hard spending cap.
 const hits = new Map();
+const PRUNE_MS = 3600000; // the longest window any bucket uses
 export function rateLimited(bucket, ip, rules) {
   const now = Date.now();
   const id = bucket + '|' + ip;
@@ -83,7 +85,7 @@ export function rateLimited(bucket, ip, rules) {
   const over = rules.some(r => list.filter(t => now - t < r.ms).length >= r.max);
   if (!over) list.push(now);
   hits.set(id, list);
-  if (hits.size > 5000) for (const [k, v] of hits) if (!v.length || now - v[v.length - 1] > longest) hits.delete(k);
+  if (hits.size > 5000) for (const [k, v] of hits) if (!v.length || now - v[v.length - 1] > PRUNE_MS) hits.delete(k);
   return over;
 }
 
@@ -126,7 +128,11 @@ async function call(path, { method = 'GET', body, timeoutMs }) {
   } catch (error) {
     throw new UpstreamError(504, error?.name === 'TimeoutError' || error?.name === 'AbortError' ? 'timeout' : 'down');
   }
-  const data = await response.json().catch(() => null);
+  // A timeout can also fire while the body is still arriving (DeepSeek keeps busy connections open with blank lines).
+  let data = null;
+  try { data = await response.json(); } catch (error) {
+    if (response.ok) throw new UpstreamError(504, error?.name === 'TimeoutError' || error?.name === 'AbortError' ? 'timeout' : 'down');
+  }
   if (!response.ok) {
     console.error('deepseek', path, response.status);
     throw new UpstreamError(response.status === 401 || response.status === 402 || response.status === 429 ? response.status : 502, statusReason(response.status));
@@ -143,7 +149,7 @@ export async function dialogue(messages, budgetMs = 50000) {
     const data = await call('/chat/completions', { method: 'POST', body, timeoutMs: Math.max(5000, left) });
     const choice = data?.choices?.[0];
     const text = choice?.message?.content ?? '';
-    if (choice?.finish_reason === 'length') throw new UpstreamError(502, 'truncated');
+    if (choice?.finish_reason === 'length' && String(text).trim()) throw new UpstreamError(502, 'truncated');
     if (choice?.finish_reason === 'content_filter') throw new UpstreamError(502, 'filtered');
     if (choice?.finish_reason === 'insufficient_system_resource') throw new UpstreamError(503, 'down');
     if (String(text).trim()) return String(text);
@@ -154,21 +160,31 @@ export async function dialogue(messages, budgetMs = 50000) {
 }
 
 // Key and balance check, plus a one-token request to confirm the model id works.
-// Cached per instance so page loads do not each reach DeepSeek.
-let cached = null;
+// Cached per instance so page loads do not each reach DeepSeek; concurrent checks share one request.
+// A one-off busy/down/timeout does not replace a recent success, and is kept only briefly.
+const TRANSIENT = ['busy', 'down', 'timeout'];
+let cached = null, pending = null;
 export async function status(force = false) {
   if (!configured()) return { configured: false, ok: false };
-  const now = Date.now();
-  if (cached && !force && now - cached.at < (cached.value.ok ? 10 : 1) * 60000) return cached.value;
-  let value;
-  try {
-    const balance = await call('/user/balance', { timeoutMs: 8000 });
-    if (balance && balance.is_available === false) throw new UpstreamError(402, 'balance');
-    await call('/chat/completions', { method: 'POST', body: { model: MODEL, messages: [{ role: 'user', content: 'ping' }], max_tokens: 1, thinking: { type: 'disabled' }, stream: false }, timeoutMs: 15000 });
-    value = { configured: true, ok: true };
-  } catch (error) {
-    value = { configured: true, ok: false, error: say('zh', error?.reason || 'down') };
-  }
-  cached = { at: now, value };
-  return value;
+  if (cached && !force && Date.now() - cached.at < cached.ttl) return cached.value;
+  if (pending) return pending;
+  pending = (async () => {
+    let value, ttl = 10 * 60000;
+    try {
+      const balance = await call('/user/balance', { timeoutMs: 8000 });
+      if (balance && balance.is_available === false) throw new UpstreamError(402, 'balance');
+      const ping = await call('/chat/completions', { method: 'POST', body: { model: MODEL, messages: [{ role: 'user', content: 'ping' }], max_tokens: 1, thinking: { type: 'disabled' }, stream: false }, timeoutMs: 15000 });
+      if (!Array.isArray(ping?.choices)) throw new UpstreamError(502, 'down');
+      value = { configured: true, ok: true };
+    } catch (error) {
+      const reason = error?.reason || 'down';
+      const transient = TRANSIENT.includes(reason);
+      if (transient && cached?.value.ok && Date.now() - cached.at < 30 * 60000) return cached.value;
+      value = { configured: true, ok: false, error: say('zh', reason), errorEn: say('en', reason) };
+      ttl = transient ? 15000 : 60000;
+    }
+    cached = { at: Date.now(), ttl, value };
+    return value;
+  })().finally(() => { pending = null; });
+  return pending;
 }

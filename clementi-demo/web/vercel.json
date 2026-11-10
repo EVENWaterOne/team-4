@@ -3,8 +3,9 @@
   "framework": null,
   "buildCommand": "node build.cjs",
   "outputDirectory": "out",
+  "installCommand": "",
   "functions": {
-    "api/*.mjs": { "maxDuration": 60 }
+    "api/*.mjs": { "maxDuration": 60, "installCommand": "" }
   },
   "headers": [
     {

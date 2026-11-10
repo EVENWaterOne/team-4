@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Builds the public web copy of the game into clementi-demo/web/out (static files only).
 // It takes clementi-demo/dist as is, keeps only what index.html loads (plus licence notes),
-// and turns on server-side AI on any http(s) host. The dialogue proxy is api/*.mjs next to this file.
+// turns on server-side AI on any http(s) host, and rewords the launcher-only hints in the AI settings panel. The dialogue proxy is api/*.mjs next to this file.
 // It also refreshes api/_lib/prompts.mjs, the list of system prompts the proxy accepts.
 // Usage: node clementi-demo/web/build.cjs   (the host runs the same command)
 const fs = require('fs');
@@ -34,7 +34,24 @@ const dialogue = fs.readFileSync(dialogueFile, 'utf8');
 const localOnly = "const served=/^https?:$/.test(root.location?.protocol||'')&&/^(127\\.0\\.0\\.1|localhost)$/.test(root.location?.hostname||'');";
 const anyHost = "const served=/^https?:$/.test(root.location?.protocol||'');";
 if (dialogue.split(localOnly).length !== 2) fail('the local-only AI check in year-dialogue.js changed; update build.cjs');
-fs.writeFileSync(dialogueFile, dialogue.replace(localOnly, anyHost));
+let webDialogue = dialogue.replace(localOnly, anyHost);
+
+// Wording only: the settings panel speaks of a local launcher and key file, which web visitors do not have.
+// If main rewords any of these, the build keeps going with the original text and says so.
+const wording = [
+  ["localStatus.error=String(v.error||'')", "localStatus.error=String(v.error||'');localStatus.errorEn=String(v.errorEn||v.error||'')"],
+  ["(localStatus.error||'unknown reason')", "(localStatus.errorEn||localStatus.error||'unknown reason')"],
+  ["w('本机没有找到 Key','No local key found')", "w('网站还没有配置 Key','This site has no key yet')"],
+  ["w('把 deepseek-key.txt 放进 clementi-demo 文件夹，再重新运行“启动游戏.cmd”。','Put deepseek-key.txt in the clementi-demo folder, then run 启动游戏.cmd again.')", "w('可以先用离线对白。','Offline dialogue still works.')"],
+  ['。启动窗口里也会显示原因。', '。'],
+  ['. The launcher window shows the reason too.', '.'],
+  ["w('本机服务没有回应','The local server did not answer')", "w('服务器没有回应','The server did not answer')"]
+];
+for (const [from, to] of wording) {
+  if (webDialogue.split(from).length === 2) webDialogue = webDialogue.replace(from, to);
+  else console.warn('note: settings wording not found, left as is: ' + from.slice(0, 60));
+}
+fs.writeFileSync(dialogueFile, webDialogue);
 
 // 3. The proxy forwards only the game's own system prompts. Take them from this exact build.
 const start = dialogue.indexOf('function systemPrompt(){');
