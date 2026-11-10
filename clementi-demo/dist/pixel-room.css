@@ -127,7 +127,7 @@
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-log-head .year-talk-trust>svg{color:var(--px-gold);stroke-width:2.2}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-log-head .year-talk-trust-bar{flex:0 1 124px;gap:4px;min-width:64px}
 [data-ui="pixel"][lang="en"] .year-body #modal.home-modal .year-talk-log-head .year-talk-block-label{letter-spacing:.04em}
-[data-ui="pixel"] .year-body #modal.home-modal .year-talk-log-head .year-talk-trust-bar i{box-sizing:border-box;height:14px;border:2px solid var(--px-line);border-radius:0;background:var(--px-ink-2);box-shadow:none;transition:background-color .2s steps(2)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-log-head .year-talk-trust-bar i{box-sizing:border-box;height:14px;border:2px solid var(--px-line);border-radius:0;background:var(--px-ink-2);box-shadow:none;transition:background-color .2s var(--px-ease)}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-trust-bar i.is-on{border-color:var(--px-ink-2);background:var(--px-gold);box-shadow:inset 0 -3px 0 var(--px-gold-dk),inset 0 2px 0 var(--px-gold-2)}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-trust-bar i.is-mark::after{right:-5px;top:-6px;width:2px;height:22px;background:var(--px-text)}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-trust[data-level="5"] .year-talk-trust-bar i{background:var(--px-gold-2);box-shadow:inset 0 -3px 0 var(--px-gold)}
@@ -186,7 +186,7 @@
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-copy p{color:var(--px-text-ink);font-size:13px;line-height:1.65}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-story{color:var(--px-text-ink-dim)}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-story summary{color:var(--px-red);font-weight:600}
-[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-ask{gap:8px;min-height:34px;margin-top:6px;padding:6px 12px 6px 8px;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-gold);color:var(--px-ink);box-shadow:3px 3px 0 var(--px-red);font:400 12px/1 var(--px-font-label);letter-spacing:.1em;text-transform:uppercase;transition:transform .08s steps(2),box-shadow .08s steps(2),background-color .1s}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-ask{gap:8px;min-height:34px;margin-top:6px;padding:6px 12px 6px 8px;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-gold);color:var(--px-ink);box-shadow:3px 3px 0 var(--px-red);font:400 12px/1 var(--px-font-label);letter-spacing:.1em;text-transform:uppercase;transition:transform .08s var(--px-ease),box-shadow .08s var(--px-ease),background-color .1s}
 [data-ui="pixel"][lang="en"] .year-body #modal.home-modal .year-talk-object-ask{letter-spacing:.06em}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-ask svg{stroke-width:2.4}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-object-ask:hover:not(:disabled){background:var(--px-gold-2);transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--px-red)}
@@ -205,21 +205,21 @@
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-respond .year-talk-return.primary-button{box-shadow:3px 3px 0 var(--px-red)}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-respond .year-talk-return .ui-icon{width:16px;height:16px;stroke-width:2.6}
 
-[data-ui="pixel"] .year-body #modal.home-modal .year-talk-respond .year-talk-composer.is-compact{gap:8px;padding:4px 4px 4px 10px;border:2px solid var(--px-line);border-radius:0;background:var(--px-ink-2);box-shadow:inset 2px 2px 0 #00000059;transition:border-color .1s steps(2)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-respond .year-talk-composer.is-compact{gap:8px;padding:4px 4px 4px 10px;border:2px solid var(--px-line);border-radius:0;background:var(--px-ink-2);box-shadow:inset 2px 2px 0 #00000059;transition:border-color .1s var(--px-ease)}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-respond .year-talk-composer.is-compact:focus-within{border-color:var(--px-gold);box-shadow:inset 2px 2px 0 #00000059}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-composer.is-compact .year-talk-own{color:var(--px-gold);font:400 12px/1 var(--px-font-pixel);letter-spacing:.04em}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-composer textarea{color:var(--px-text);font-family:var(--px-font-body);font-size:14px;caret-color:var(--px-gold)}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-composer textarea::placeholder{color:#8f99ad;opacity:1}
 /* the composer's gold border already shows focus; no second dashed ring inside it */
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-composer textarea:focus-visible{outline:none!important}
-[data-ui="pixel"] .year-body #modal.home-modal .year-talk-send-icon{border:2px solid var(--px-ink);border-radius:0;background:var(--px-gold);color:var(--px-ink);box-shadow:2px 2px 0 var(--px-red);transition:transform .08s steps(2),box-shadow .08s steps(2),background-color .1s}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-send-icon{border:2px solid var(--px-ink);border-radius:0;background:var(--px-gold);color:var(--px-ink);box-shadow:2px 2px 0 var(--px-red);transition:transform .08s var(--px-ease),box-shadow .08s var(--px-ease),background-color .1s}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-send-icon svg{stroke-width:2.4;stroke-linejoin:miter}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-send-icon:hover:not(:disabled){background:var(--px-gold-2);transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--px-red)}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-send-icon:active:not(:disabled){transform:translate(2px,2px);box-shadow:0 0 0 var(--px-red)}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-send-icon:disabled{opacity:1;background:var(--px-navy-3);color:var(--px-gray);box-shadow:none}
 
 [data-ui="pixel"] .year-body #modal.home-modal .cm-home-conversation .year-talk-choice-grid{gap:8px}
-[data-ui="pixel"] .year-body #modal.home-modal .year-talk-choice{gap:10px;min-height:42px;padding:6px 12px 6px 6px;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-navy-2);color:var(--px-text);font-size:14px;line-height:1.45;box-shadow:inset 0 0 0 2px var(--px-navy-3),3px 3px 0 var(--px-ink-2);transition:transform .08s steps(2),box-shadow .08s steps(2),background-color .1s,border-color .1s}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-choice{gap:10px;min-height:42px;padding:6px 12px 6px 6px;border:2px solid var(--px-ink-2);border-radius:0;background:var(--px-navy-2);color:var(--px-text);font-size:14px;line-height:1.45;box-shadow:inset 0 0 0 2px var(--px-navy-3),3px 3px 0 var(--px-ink-2);transition:transform .08s var(--px-ease),box-shadow .08s var(--px-ease),background-color .1s,border-color .1s}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-choice svg{flex:0 0 30px;box-sizing:border-box;width:30px;height:30px;padding:4px;border:2px solid var(--px-ink-2);background:var(--px-teal);color:var(--px-ink);stroke-width:2.3}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-choice.is-care svg{background:var(--px-red);color:#fff}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-choice.is-form svg{background:var(--px-gray);color:var(--px-ink)}
@@ -239,7 +239,7 @@
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-idle svg{color:var(--px-gold)}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-composer:not(.is-compact){border:2px solid var(--px-line);border-radius:0;background:var(--px-ink-2);box-shadow:inset 2px 2px 0 #00000059}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-composer:not(.is-compact):focus-within{border-color:var(--px-gold);box-shadow:inset 2px 2px 0 #00000059}
-[data-ui="pixel"] .year-body #modal.home-modal .year-talk-suggestions button{border:2px solid var(--px-line);border-radius:0;background:var(--px-navy-2);color:var(--px-text);font-size:12px;transition:transform .08s steps(2)}
+[data-ui="pixel"] .year-body #modal.home-modal .year-talk-suggestions button{border:2px solid var(--px-line);border-radius:0;background:var(--px-navy-2);color:var(--px-text);font-size:12px;transition:transform .08s var(--px-ease)}
 [data-ui="pixel"] .year-body #modal.home-modal .year-talk-suggestions button:hover:not(:disabled){border-color:var(--px-gold);background:var(--px-navy-3);transform:translate(-1px,-1px)}
 
 /* ================= Knock: a declined door ================= */
@@ -321,24 +321,24 @@
 /* ================= Motion: short and stepped ================= */
 @media (prefers-reduced-motion:no-preference){
   [data-ui="pixel"] .year-body #modal.home-modal .cm-home-layout>.cm-home-panel,
-  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-layout>.cm-home-conversation{animation-duration:.24s;animation-timing-function:steps(4,end)}
-  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-object.is-arriving{animation:px-room-slide .2s steps(4,end) both}
-  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-object.is-arriving .year-talk-object-art img{animation:px-room-pop .24s .1s steps(3,end) both}
-  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-respond .year-talk-choice{animation-duration:.2s;animation-timing-function:steps(3,end)}
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-layout>.cm-home-conversation{animation-duration:.24s;animation-timing-function:var(--px-ease)}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-object.is-arriving{animation:px-room-slide .2s var(--px-ease) both}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-object.is-arriving .year-talk-object-art img{animation:px-room-pop .24s .1s var(--px-ease) both}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-respond .year-talk-choice{animation-duration:.2s;animation-timing-function:var(--px-ease)}
   [data-ui="pixel"] .year-body #modal.home-modal .year-talk-log .year-talk-exchange.is-new .year-talk-player,
   [data-ui="pixel"] .year-body #modal.home-modal .year-talk-exchange.is-pending .year-talk-player,
-  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-log .year-talk-exchange.is-new .year-talk-reply{animation-duration:.2s;animation-timing-function:steps(3,end)}
+  [data-ui="pixel"] .year-body #modal.home-modal .year-talk-log .year-talk-exchange.is-new .year-talk-reply{animation-duration:.2s;animation-timing-function:var(--px-ease)}
   [data-ui="pixel"] .year-body #modal.home-modal .year-talk-trust-bar i.is-rising{animation:px-room-seg .48s steps(1,end) both;animation-delay:var(--d,0s)}
   [data-ui="pixel"] .year-body #modal.home-modal .year-talk-clue.is-fresh{background:var(--px-gold);animation:px-room-clue .96s steps(1,end) both}
   [data-ui="pixel"] .year-body #modal.home-modal .year-talk-typing i{animation:px-room-dot .9s steps(1,end) infinite}
   [data-ui="pixel"] .year-body #modal.home-modal .year-talk-typing i:nth-child(2){animation-delay:.3s}
   [data-ui="pixel"] .year-body #modal.home-modal .year-talk-typing i:nth-child(3){animation-delay:.6s}
-  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor-brackets{animation:cm-cursor-in .12s steps(2,end),px-room-breathe 1s .12s steps(1,end) infinite}
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor-brackets{animation:cm-cursor-in .12s var(--px-ease-loop),px-room-breathe 1s .12s steps(1,end) infinite}
   [data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor.is-going .cm-home-cursor-brackets{animation:px-room-breathe .5s steps(1,end) infinite}
-  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor-tag{animation:cm-tag-in .12s steps(2,end) both}
-  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-bookmark.is-new{animation:px-room-pop .3s .15s steps(3,end) both}
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-cursor-tag{animation:cm-tag-in .12s var(--px-ease) both}
+  [data-ui="pixel"] .year-body #modal.home-modal .cm-home-bookmark.is-new{animation:px-room-pop .3s .15s var(--px-ease) both}
   [data-ui="pixel"] .year-body #modal.refusal-modal .refusal-card,
-  [data-ui="pixel"] .year-body #modal.refusal-modal .refusal-foot{animation-duration:.24s;animation-timing-function:steps(3,end)}
+  [data-ui="pixel"] .year-body #modal.refusal-modal .refusal-foot{animation-duration:.24s;animation-timing-function:var(--px-ease)}
 }
 @media (prefers-reduced-motion:reduce){
   [data-ui="pixel"] .year-body #modal.home-modal :is(.year-talk-choice,.year-talk-object-ask,.year-talk-send-icon,.year-talk-composer,.year-talk-trust-bar i,.year-talk-suggestions button){transition:none}

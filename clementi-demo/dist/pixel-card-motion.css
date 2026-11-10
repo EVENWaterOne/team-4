@@ -2,8 +2,8 @@
    Card motion for the pixel UI: deal, hover, drag to play, pick, discard.
    Feel borrowed from Slay the Spire (hand fans out, drag a card up to play it)
    and Balatro (snappy overshoot, cards sway while dragged, a small thud on play).
-   Pixel rules: whole-pixel moves, hard shadows, short times, steps() for flips
-   and pops; cards never rest at a fractional scale. card-motion.js drives the
+   Pixel rules: whole-pixel resting places, hard shadows, short smooth moves
+   (--px-ease); cards never rest at a fractional scale. card-motion.js drives the
    drag and the discard ghosts. Everything here is off for reduced motion.
    ===================================================================== */
 @media (prefers-reduced-motion:no-preference){
@@ -12,7 +12,7 @@
 [data-ui="pixel"] .yr-policy .yr-card{
   --shift:0px;
   transform:translate(var(--shift),calc(var(--drop) + var(--lift))) rotate(var(--tilt));
-  transition:transform .16s cubic-bezier(.3,1.5,.5,1),opacity .12s steps(2,end),filter .12s steps(2,end);
+  transition:transform .16s cubic-bezier(.3,1.5,.5,1),opacity .12s var(--px-ease),filter .12s var(--px-ease);
 }
 /* hover: the card straightens and rises; its neighbours step aside to make room */
 [data-ui="pixel"] .yr-policy .yr-card:hover,
@@ -21,23 +21,23 @@
 [data-ui="pixel"] .yr-policy .policy-options>.yr-card:focus-within~.yr-card{--shift:18px}
 [data-ui="pixel"] .yr-policy .policy-options>.yr-card:has(~.yr-card:hover),
 [data-ui="pixel"] .yr-policy .policy-options>.yr-card:has(~.yr-card:focus-within){--shift:-18px}
-/* a two-frame wiggle when the pointer lands on a card */
-[data-ui="pixel"] .yr-policy .yr-card:not(.is-dragging):hover .policy-option:not(:disabled){animation:pxm-wiggle .2s steps(4,end)}
+/* a quick wiggle when the pointer lands on a card */
+[data-ui="pixel"] .yr-policy .yr-card:not(.is-dragging):hover .policy-option:not(:disabled){animation:pxm-wiggle .2s var(--px-ease)}
 @keyframes pxm-wiggle{25%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}75%{transform:rotate(-1deg)}}
 
 /* the chosen card stays up; the others sink a little, like an unplayed hand */
 [data-ui="pixel"] .yr-policy .yr-card.is-on{--lift:-20px}
 [data-ui="pixel"] .yr-policy .yr-card.is-other:not(:hover):not(:focus-within){--drop:22px}
-[data-ui="pixel"] .yr-policy .yr-card.is-on .yr-card-check{animation:pxm-bob 1.2s steps(2,end) infinite}
+[data-ui="pixel"] .yr-policy .yr-card.is-on .yr-card-check{animation:pxm-bob 1.2s var(--px-ease-loop) infinite}
 @keyframes pxm-bob{50%{transform:translate(-50%,-2px)}}
 
-/* —— deal: cards fly in from the draw pile at the lower left, then flip face up in four frames —— */
+/* —— deal: cards fly in from the draw pile at the lower left, then flip face up —— */
 [data-ui="pixel"] .yr-policy .yr-card.is-dealing{
   animation:pxm-deal .34s cubic-bezier(.2,.9,.3,1.15) both;
   animation-delay:calc(var(--n) * .08s);
 }
 [data-ui="pixel"] .yr-policy .yr-card.is-dealing .yr-card-inner{
-  animation:pxm-deal-flip .2s steps(4,end) both;
+  animation:pxm-deal-flip .2s var(--px-ease) both;
   animation-delay:calc(var(--n) * .08s + .2s);
 }
 @keyframes pxm-deal{
@@ -54,10 +54,10 @@
   55%{transform:translate(var(--shift),calc(var(--drop) + var(--lift) - 14px)) rotate(var(--tilt))}
 }
 [data-ui="pixel"] .yr-policy .yr-card.is-picked-now .yr-card-check,
-[data-ui="pixel"] .yr-policy .yr-card.pxm-landed .yr-card-check{animation:pxm-badge .28s steps(4,end) both}
+[data-ui="pixel"] .yr-policy .yr-card.pxm-landed .yr-card-check{animation:pxm-badge .28s var(--px-ease) both}
 @keyframes pxm-badge{0%{transform:translate(-50%,0) scale(0)}50%{transform:translate(-50%,-6px) scale(1.5)}100%{transform:translate(-50%,0) scale(1)}}
 [data-ui="pixel"] .yr-policy .policy-options:has(>.is-picked-now),
-[data-ui="pixel"] .yr-policy .policy-options.pxm-thud{animation:pxm-thud .2s steps(4,end) .12s}
+[data-ui="pixel"] .yr-policy .policy-options.pxm-thud{animation:pxm-thud .2s var(--px-ease) .12s}
 @keyframes pxm-thud{25%{transform:translate(0,3px)}50%{transform:translate(-2px,1px)}75%{transform:translate(1px,-1px)}}
 
 /* —— drag to play (card-motion.js sets the variables) —— */
@@ -92,17 +92,17 @@
 [data-ui="pixel"] .pxm-ghosts .yr-card{position:fixed;margin:0;transition:none;animation:none;pointer-events:none}
 [data-ui="pixel"] .pxm-ghosts .yr-card *{animation:none!important;transition:none!important}
 /* the slot in the side list takes the chosen card with a stamp */
-[data-ui="pixel"] .yr-policy-item.pxm-slot-hit{animation:pxm-stamp .24s steps(3,end)}
+[data-ui="pixel"] .yr-policy-item.pxm-slot-hit{animation:pxm-stamp .24s var(--px-ease)}
 @keyframes pxm-stamp{0%{transform:translate(3px,3px);box-shadow:none}50%{transform:translate(-1px,-1px);background:var(--px-gold);color:var(--px-ink)}}
 
 /* —— urgent alert: the event card is slammed onto the table —— */
-[data-ui="pixel"] .yr-alert:not(.is-leaving) .yr-alert-panel{animation:pxm-alert-in .24s steps(4,end) both}
+[data-ui="pixel"] .yr-alert:not(.is-leaving) .yr-alert-panel{animation:pxm-alert-in .24s var(--px-ease) both}
 @keyframes pxm-alert-in{0%{opacity:0;transform:translate(0,24px)}25%{opacity:1}}
 [data-ui="pixel"] .yr-alert:not(.is-leaving) .yr-alert-card{animation:pxm-slam .26s calc(.24s + var(--n,0) * .16s) cubic-bezier(.2,1.4,.4,1) both}
 @keyframes pxm-slam{0%{opacity:0;transform:translate(-6px,-48px) rotate(-4deg)}30%{opacity:1}70%{transform:translate(0,4px) rotate(0deg)}100%{transform:none}}
 
 /* —— need details: the three small cards are dealt left to right —— */
-[data-ui="pixel"] .yr-need-detail .yr-mini-card{animation:pxm-mini-in .18s steps(3,end) both}
+[data-ui="pixel"] .yr-need-detail .yr-mini-card{animation:pxm-mini-in .18s var(--px-ease) both}
 [data-ui="pixel"] .yr-need-detail .yr-mini-card:nth-child(2){animation-delay:.05s}
 [data-ui="pixel"] .yr-need-detail .yr-mini-card:nth-child(3){animation-delay:.1s}
 @keyframes pxm-mini-in{0%{opacity:0;transform:translate(-12px,12px)}34%{opacity:1}}
