@@ -27,14 +27,14 @@
   let layer=null;
   function bits(){
     const host=doc.querySelector('dialog[open]')||doc.body;if(layer&&layer.isConnected&&layer.parentNode===host)return layer;
-    layer?.remove();layer=doc.createElement('div');layer.className='pxm-layer';layer.setAttribute('aria-hidden','true');host.appendChild(layer);return layer;
+    layer?.remove();layer=doc.createElement('div');layer.className='pxfx-layer';layer.setAttribute('aria-hidden','true');host.appendChild(layer);return layer;
   }
   // Points come in viewport pixels; the layer may not start at the viewport corner (a moving dialog).
   function local(p){const o=bits().getBoundingClientRect();return {x:p.x-o.left,y:p.y-o.top};}
   function centre(el){const r=el.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2,r};}
   // A low arc in a handful of hard frames, every frame on a whole pixel.
   function fly(from,to,{cls='',frames=7,duration=260,lift=40,size=10,delay=0}={}){
-    from=local(from);to=local(to);const bit=doc.createElement('i');bit.className='pxm-bit '+cls;bit.style.width=bit.style.height=size+'px';
+    from=local(from);to=local(to);const bit=doc.createElement('i');bit.className='pxfx-bit '+cls;bit.style.width=bit.style.height=size+'px';
     const at=t=>'translate('+Math.round(from.x+(to.x-from.x)*t-size/2)+'px,'+Math.round(from.y+(to.y-from.y)*t-lift*4*t*(1-t)-size/2)+'px)';
     bit.style.transform=at(0);bits().appendChild(bit);
     if(typeof bit.animate!=='function'){bit.remove();return Promise.resolve();}
@@ -62,12 +62,12 @@
     const lo=Math.min(g.a,g.value),hi=Math.max(g.a,g.value);
     g.base.style.width=pct(lo).toFixed(1)+'%';g.delta.style.left=pct(lo).toFixed(1)+'%';g.delta.style.setProperty('--w',(pct(hi)-pct(lo)).toFixed(1)+'%');
     g.delta.classList.toggle('is-down',g.value<g.a);g.num.textContent=' '+g.value+' ';
-    g.row.classList.remove('pxm-bump');void g.row.offsetWidth;g.row.classList.add('pxm-bump');
+    g.row.classList.remove('pxfx-bump');void g.row.offsetWidth;g.row.classList.add('pxfx-bump');
   }
   function edge(g){const r=g.track.getBoundingClientRect();return {x:r.left+r.width*pct(g.value)/100,y:r.top+r.height/2};}
   function cheer(g){
     if(g.cheered||g.a>=TARGET||g.b<TARGET||g.value<TARGET)return;g.cheered=true;
-    g.row.classList.add('pxm-goal');sound('goal');
+    g.row.classList.add('pxfx-goal');sound('goal');
     const mark=g.track.querySelector('b');if(mark)burst(centre(mark),{count:10,reach:40});
   }
   function chipAmount(chip){const m=/(\d+)/.exec(chip.textContent||'');const n=m?parseInt(m[1],10):0;return chip.classList.contains('is-down')||/[-−]\s*\d/.test(chip.textContent||'')?-n:n;}
@@ -75,10 +75,10 @@
     const {report}=t,alive=()=>!t.done&&report.isConnected;let n=0,pace=1;
     await wait(300);
     for(const result of report.querySelectorAll('.yr-result')){
-      if(!alive())return;result.classList.add('pxm-in');sound('tap');await wait(150*pace);
+      if(!alive())return;result.classList.add('pxfx-in');sound('tap');await wait(150*pace);
       const flights=[];
       for(const chip of result.querySelectorAll('.yr-result-effects>span')){
-        if(!alive())return;const g=t.rows.find(x=>chip.classList.contains('is-'+x.key));chip.classList.add('pxm-hit');if(!g)continue;
+        if(!alive())return;const g=t.rows.find(x=>chip.classList.contains('is-'+x.key));chip.classList.add('pxfx-hit');if(!g)continue;
         const amount=chipAmount(chip);
         flights.push(fly(centre(chip),edge(g),{cls:'is-'+g.key+(amount<0?' is-down':''),duration:Math.round(260*pace)}).then(()=>{
           if(!alive())return;g.value=Math.max(0,Math.min(100,g.value+amount));paintRow(g);sound('tick',n++);cheer(g);}));
@@ -90,19 +90,19 @@
     for(const g of t.rows){
       if(!alive())return;
       if(g.value!==g.b){const from=g.value,steps=Math.min(4,Math.abs(g.b-from));for(let i=1;i<=steps;i++){if(!alive())return;g.value=Math.round(from+(g.b-from)*i/steps);paintRow(g);if(i===steps)sound('tick',n++);cheer(g);await wait(55);}}
-      g.row.classList.add('pxm-settled');await wait(110);
+      g.row.classList.add('pxfx-settled');await wait(110);
     }
-    if(!alive())return;report.querySelector('.yr-money')?.classList.add('pxm-in');await wait(200);
+    if(!alive())return;report.querySelector('.yr-money')?.classList.add('pxfx-in');await wait(200);
     finish(t);
   }
   function finish(t){
     if(!t||t.done)return;t.done=true;if(tally===t)tally=null;
-    const {report}=t;report.classList.remove('pxm-tally');report.removeEventListener('click',t.skip,true);doc.removeEventListener('keydown',t.key,true);
+    const {report}=t;report.classList.remove('pxfx-tally');report.removeEventListener('click',t.skip,true);doc.removeEventListener('keydown',t.key,true);
     for(const g of t.rows){
       g.base.setAttribute('style',g.saved.base||'');g.delta.setAttribute('style',g.saved.delta||'');g.delta.classList.toggle('is-down',g.saved.down);
-      g.delta.classList.remove('is-growing');g.num.textContent=' '+g.b+' ';g.row.classList.remove('pxm-bump');
+      g.delta.classList.remove('is-growing');g.num.textContent=' '+g.b+' ';g.row.classList.remove('pxfx-bump');
     }
-    report.querySelectorAll('.pxm-in,.pxm-hit,.pxm-settled').forEach(el=>el.classList.remove('pxm-in','pxm-hit','pxm-settled'));
+    report.querySelectorAll('.pxfx-in,.pxfx-hit,.pxfx-settled').forEach(el=>el.classList.remove('pxfx-in','pxfx-hit','pxfx-settled'));
   }
   function startTally(report){
     if(tally&&tally.report===report)return;if(tally)finish(tally);
@@ -112,7 +112,7 @@
     t.skip=e=>{if(!e.target.closest?.('button,a,summary,input'))finish(t);};
     t.key=e=>{if(['Escape',' ','Enter'].includes(e.key)&&!e.target.closest?.('input,textarea'))finish(t);};
     report.addEventListener('click',t.skip,true);doc.addEventListener('keydown',t.key,true);
-    report.classList.add('pxm-tally');for(const g of rows){g.delta.classList.remove('is-growing');g.delta.style.setProperty('--w','0%');g.base.style.width=pct(g.a).toFixed(1)+'%';g.delta.style.left=pct(g.a).toFixed(1)+'%';g.num.textContent=' '+g.a+' ';}
+    report.classList.add('pxfx-tally');for(const g of rows){g.delta.classList.remove('is-growing');g.delta.style.setProperty('--w','0%');g.base.style.width=pct(g.a).toFixed(1)+'%';g.delta.style.left=pct(g.a).toFixed(1)+'%';g.num.textContent=' '+g.a+' ';}
     count(t).catch(()=>finish(t));
   }
   function checkReport(){
@@ -131,22 +131,22 @@
   }
   function think(at,delay){
     // Three squares stepping up and to the right, small to big, gone once the bit leaves.
-    const sizes=[4,6,8],p=local(at);sizes.forEach((s,i)=>{const dot=doc.createElement('i');dot.className='pxm-think';dot.style.cssText='width:'+s+'px;height:'+s+'px;transform:translate('+Math.round(p.x+i*7-s/2)+'px,'+Math.round(p.y-8-i*9-s/2)+'px);animation-delay:'+(delay+i*40)+'ms';bits().appendChild(dot);root.setTimeout(()=>dot.remove(),delay+360);});
+    const sizes=[4,6,8],p=local(at);sizes.forEach((s,i)=>{const dot=doc.createElement('i');dot.className='pxfx-think';dot.style.cssText='width:'+s+'px;height:'+s+'px;transform:translate('+Math.round(p.x+i*7-s/2)+'px,'+Math.round(p.y-8-i*9-s/2)+'px);animation-delay:'+(delay+i*40)+'ms';bits().appendChild(dot);root.setTimeout(()=>dot.remove(),delay+360);});
     return {x:at.x+14,y:at.y-26};
   }
   function checkTrust(){
     const panel=doc.getElementById('year-talk-panel'),meter=panel?.querySelector('.year-talk-trust');
     if(meter){
       const talk=panel.dataset.yearTalkIssue||'',level=Number(meter.dataset.level);
-      if(talk===lastLevel.talk&&level===5&&lastLevel.level<5&&!meter.dataset.pxmFull&&live()){meter.dataset.pxmFull='1';meter.classList.add('pxm-full');root.setTimeout(()=>burst(centre(meter.querySelector('.year-talk-trust-bar')||meter),{count:8,reach:30}),120);}
+      if(talk===lastLevel.talk&&level===5&&lastLevel.level<5&&!meter.dataset.pxfxFull&&live()){meter.dataset.pxfxFull='1';meter.classList.add('pxfx-full');root.setTimeout(()=>burst(centre(meter.querySelector('.year-talk-trust-bar')||meter),{count:8,reach:30}),120);}
       lastLevel={talk,level};
     }
-    const cells=[...doc.querySelectorAll('#modal .year-talk-trust-bar i.is-rising:not([data-pxm])')];if(!cells.length)return;
-    cells.forEach(c=>c.dataset.pxm='1');if(!live())return;
+    const cells=[...doc.querySelectorAll('#modal .year-talk-trust-bar i.is-rising:not([data-pxfx])')];if(!cells.length)return;
+    cells.forEach(c=>c.dataset.pxfx='1');if(!live())return;
     const from=residentPoint();
     cells.forEach(cell=>{
       const d=Math.round((parseFloat(cell.style.getPropertyValue('--d'))||0)*1000),start=from?think(from,d):centre(cell.closest('.year-talk-trust')?.querySelector('svg')||cell);
-      cell.classList.add('pxm-await');
+      cell.classList.add('pxfx-await');
       fly(start,centre(cell),{cls:'is-gold',delay:d+(from?140:40),duration:210,frames:6,lift:from?28:12,size:8});
     });
   }
@@ -157,20 +157,20 @@
   function lately(kind,text){const now=Date.now(),was=seenLately[kind];seenLately[kind]={text,at:now};return !!was&&was.text===text&&now-was.at<20000;}
   function sweep(mark){
     const text=mark.textContent||'';if(!text)return 0;const chars=[...text],per=Math.max(12,Math.min(42,Math.round(900/chars.length)));
-    mark.textContent='';mark.classList.add('pxm-sweep');mark.style.setProperty('--per',per+'ms');
-    chars.forEach((c,i)=>{const s=doc.createElement('span');s.className='pxm-ch';s.style.setProperty('--k',i);s.textContent=c;mark.appendChild(s);});
+    mark.textContent='';mark.classList.add('pxfx-sweep');mark.style.setProperty('--per',per+'ms');
+    chars.forEach((c,i)=>{const s=doc.createElement('span');s.className='pxfx-ch';s.style.setProperty('--k',i);s.textContent=c;mark.appendChild(s);});
     const total=chars.length*per+120;
-    root.setTimeout(()=>{if(!mark.isConnected)return;mark.textContent=text;mark.classList.remove('pxm-sweep','is-fresh');mark.style.removeProperty('--per');},total);
+    root.setTimeout(()=>{if(!mark.isConnected)return;mark.textContent=text;mark.classList.remove('pxfx-sweep','is-fresh');mark.style.removeProperty('--per');},total);
     return total;
   }
   function stamp(card,delay){
-    card.classList.add('pxm-wait');
-    root.setTimeout(()=>{if(!card.isConnected)return;card.classList.remove('pxm-wait');card.classList.add('pxm-stamp');sound('card');root.setTimeout(()=>card.classList.remove('pxm-stamp'),360);},delay);
+    card.classList.add('pxfx-wait');
+    root.setTimeout(()=>{if(!card.isConnected)return;card.classList.remove('pxfx-wait');card.classList.add('pxfx-stamp');sound('card');root.setTimeout(()=>card.classList.remove('pxfx-stamp'),360);},delay);
   }
   function checkClue(){
-    const marks=[...doc.querySelectorAll('#modal .year-talk-clue.is-fresh:not([data-pxm])')],cards=[...doc.querySelectorAll('#modal .year-talk-found.is-fresh:not([data-pxm])')];
+    const marks=[...doc.querySelectorAll('#modal .year-talk-clue.is-fresh:not([data-pxfx])')],cards=[...doc.querySelectorAll('#modal .year-talk-found.is-fresh:not([data-pxfx])')];
     if(!marks.length&&!cards.length)return;
-    marks.forEach(m=>m.dataset.pxm='1');cards.forEach(c=>c.dataset.pxm='1');if(!live())return;
+    marks.forEach(m=>m.dataset.pxfx='1');cards.forEach(c=>c.dataset.pxfx='1');if(!live())return;
     let delay=0;
     for(const mark of marks)if(!lately('clue',mark.textContent||''))delay=Math.max(delay,sweep(mark));
     for(const card of cards)if(!lately('card',card.textContent||''))stamp(card,delay?delay+60:0);
@@ -190,10 +190,10 @@
   let pressTimer=0;
   function press(e){
     const map=e.target.closest?.('#cm-home-map');if(!map||!live())return;
-    map.dataset.pxmPress='1';root.clearTimeout(pressTimer);
-    const up=()=>{pressTimer=root.setTimeout(()=>{delete map.dataset.pxmPress;},70);};
+    map.dataset.pxfxPress='1';root.clearTimeout(pressTimer);
+    const up=()=>{pressTimer=root.setTimeout(()=>{delete map.dataset.pxfxPress;},70);};
     doc.addEventListener('pointerup',up,{once:true,capture:true});doc.addEventListener('pointercancel',up,{once:true,capture:true});
-    pressTimer=root.setTimeout(()=>{delete map.dataset.pxmPress;},600);
+    pressTimer=root.setTimeout(()=>{delete map.dataset.pxfxPress;},600);
   }
 
   /* —— Watching the page —— */
