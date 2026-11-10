@@ -4,6 +4,7 @@
   "buildCommand": "node build.cjs",
   "outputDirectory": "out",
   "installCommand": "",
+  "regions": ["sin1"],
   "functions": {
     "api/*.mjs": { "maxDuration": 60, "installCommand": "" }
   },
