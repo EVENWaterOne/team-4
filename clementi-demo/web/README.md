@@ -19,7 +19,7 @@
 
 项目设置：Root Directory 设为 `clementi-demo/web`，Framework 选 Other，开启 "Include files outside the root directory"。构建命令、输出目录和"不安装依赖"写在 `vercel.json` 里（这个文件夹没有依赖，跳过安装能避免去装仓库根目录那个旧 Vite 项目）。
 
-环境变量：`DEEPSEEK_API_KEY`（必填，建议单独开一个只充少量余额的 Key）、`DEEPSEEK_MODEL`（可选）。没有 Key 时网页照样能玩，对话自动用离线版。
+环境变量：`DEEPSEEK_API_KEY`（必填，类型选 Sensitive，保存后读不回原文）、`DEEPSEEK_MODEL`（可选）。建议给网站单独开一个 Key，出问题可以单独作废，不影响本机的游戏；账号里别放太多余额，余额用完接口就停，这是花费的硬上限。没有 Key 时网页照样能玩，对话自动用离线版。
 
 ## 改了游戏之后
 
