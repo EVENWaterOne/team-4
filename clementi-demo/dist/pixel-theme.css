@@ -1,0 +1,143 @@
+/* Downstairs pixel UI: tokens and shared pieces.
+   Visual language from the CDE5311 final presentation deck (Figma) and pixel street games:
+   pixel display type, ruled cream paper, deep navy, square corners and hard offset shadows.
+   Every rule is scoped to html[data-ui="pixel"], so removing that attribute restores the old look.
+   Area files: pixel-flow (title, map, case), pixel-hud (map overlays), pixel-room (visits and talk),
+   pixel-cards (needs, policy cards, enact, report, urgent, ending), pixel-guide (help, notes, settings, tutorial). */
+
+:root[data-ui="pixel"]{
+  /* Motion: the pixel look lives in shapes and type, not in the frame rate. Movement is smooth;
+     only on/off blinks use steps(1). Set --px-ease to steps(3,end) to get the old frame-by-frame feel. */
+  --px-ease:cubic-bezier(.2,.8,.3,1);      /* one-off moves: quick start, soft landing */
+  --px-ease-loop:cubic-bezier(.45,0,.55,1); /* looping moves: bob, ripple, press */
+  /* Ink and navy surfaces (dark slides) */
+  --px-ink:#141c2f;          /* deepest: page, text on paper, outlines */
+  --px-ink-2:#0c1222;        /* outer outline on dark surfaces */
+  --px-navy:#1e2c48;         /* panels */
+  --px-navy-2:#26324a;       /* raised rows inside panels */
+  --px-navy-3:#2c3854;       /* inner bevel, hover rows */
+  --px-line:#3a4868;         /* hairlines on dark */
+  --px-dash:#1d273c;         /* dashed rules on the ink page */
+  /* Paper (light slides) */
+  --px-paper:#f2ebdd;        /* page */
+  --px-card:#fbf6ea;         /* cards on paper or on navy */
+  --px-rule:#e0d5c1;         /* ruled lines, tracks */
+  --px-sand:#d9cbb2;         /* pressed paper, disabled */
+  /* Accents */
+  --px-gold:#e9c77b;  --px-gold-2:#f4dca3;  --px-gold-dk:#9c7a35;
+  --px-red:#b5483a;   --px-red-dk:#7a2d24;
+  --px-blue:#2b4fc0;  --px-blue-dk:#16297a; --px-blue-2:#4a6ad6;
+  --px-teal:#4fb3c4;  --px-teal-dk:#256f7e;
+  --px-green:#8cc46b; --px-green-dk:#4c7a36;
+  --px-orange:#e8964a;--px-orange-dk:#9a5820;
+  --px-slate:#5b6478; --px-gray:#9aa1ae;
+  /* Text */
+  --px-text:#f2ebdd;         /* on navy */
+  --px-text-dim:#b4bccb;     /* secondary on navy */
+  --px-text-ink:#141c2f;     /* on paper */
+  --px-text-ink-dim:#5b6478; /* secondary on paper */
+  /* The three goals (deck slide 5) */
+  --px-stay:var(--px-orange); --px-social:var(--px-teal); --px-comfort:var(--px-green);
+  /* Type */
+  --px-font-display:"Jersey 10","Downstairs Pixel SC","Microsoft YaHei","PingFang SC",sans-serif;
+  --px-font-label:"Silkscreen","Downstairs Pixel SC","Microsoft YaHei","PingFang SC",monospace;
+  --px-font-pixel:"Downstairs Pixel SC","Silkscreen","Microsoft YaHei",monospace;
+  --px-font-body:"Be Vietnam Pro","PingFang SC","Microsoft YaHei","Noto Sans SC","Hiragino Sans GB",system-ui,sans-serif;
+  /* Hard shadows: never blurred */
+  --px-shadow-sm:2px 2px 0 var(--px-ink);
+  --px-shadow:4px 4px 0 var(--px-ink);
+  --px-shadow-lg:8px 8px 0 var(--px-ink);
+  --px-shadow-blue:4px 4px 0 var(--px-blue-dk);
+  --px-shadow-red:6px 6px 0 var(--px-red);
+  --px-shadow-gold:4px 4px 0 var(--px-gold-dk);
+  /* Raised dark panel: outline, inner bevel, drop */
+  --px-panel-shadow:inset 0 0 0 2px var(--px-navy-3),4px 4px 0 #0c122299;
+  /* Extruded pixel titles */
+  --px-extrude-red:1px 1px 0 var(--px-red),2px 2px 0 var(--px-red),3px 3px 0 var(--px-red);
+  --px-extrude-ink:1px 1px 0 var(--px-ink),2px 2px 0 var(--px-ink),3px 3px 0 var(--px-ink),4px 4px 0 var(--px-ink);
+  /* Ruled paper and dashed ink rules */
+  --px-ruled-paper:repeating-linear-gradient(180deg,transparent 0 31px,var(--px-rule) 31px 33px);
+  --px-ruled-ink:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='48'%3E%3Crect y='46' width='10' height='2' fill='%231d273c'/%3E%3C/svg%3E");
+  --px-ruled-navy:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='40'%3E%3Crect y='38' width='10' height='2' fill='%23253350'/%3E%3C/svg%3E");
+  --px-dashed-gold:repeating-linear-gradient(90deg,var(--px-gold) 0 10px,transparent 10px 16px);
+  --px-dashed-ink:repeating-linear-gradient(90deg,var(--px-ink) 0 10px,transparent 10px 16px);
+  --px-dashed-dim:repeating-linear-gradient(90deg,#e9c77b55 0 8px,transparent 8px 14px);
+  --px-press:cubic-bezier(.2,.9,.3,1.2);
+  color-scheme:dark;
+}
+
+/* ---------- Base type ---------- */
+[data-ui="pixel"] body,
+[data-ui="pixel"] body.year-body{font-family:var(--px-font-body);background:var(--px-ink);font-synthesis:none;text-rendering:optimizeLegibility}
+[data-ui="pixel"] :root,[data-ui="pixel"]{font-family:var(--px-font-body)}
+[data-ui="pixel"] button,[data-ui="pixel"] input,[data-ui="pixel"] textarea,[data-ui="pixel"] select{font-family:inherit}
+[data-ui="pixel"] ::selection{background:var(--px-gold);color:var(--px-ink)}
+
+/* Shared helpers an area file can use in markup or extend */
+[data-ui="pixel"] .px-display{font-family:var(--px-font-display);font-weight:400;letter-spacing:.02em;line-height:1}
+[data-ui="pixel"] .px-label{font-family:var(--px-font-label);font-weight:400;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+[data-ui="pixel"] .px-tag{display:inline-flex;align-items:center;gap:6px;padding:5px 10px 4px;background:var(--px-blue);color:#fff;font:400 12px/1.2 var(--px-font-label);letter-spacing:.12em;text-transform:uppercase;box-shadow:3px 3px 0 var(--px-blue-dk);border:0;border-radius:0}
+[data-ui="pixel"] .px-tag.is-gold{background:var(--px-gold);color:var(--px-ink);box-shadow:3px 3px 0 var(--px-gold-dk)}
+[data-ui="pixel"] .px-tag.is-red{background:var(--px-red);color:#fff;box-shadow:3px 3px 0 var(--px-red-dk)}
+[data-ui="pixel"] .px-tag.is-teal{background:var(--px-teal);color:var(--px-ink);box-shadow:3px 3px 0 var(--px-teal-dk)}
+[data-ui="pixel"] .px-tag.is-ink{background:var(--px-navy);color:var(--px-gold);box-shadow:none}
+
+/* ---------- Buttons ---------- */
+[data-ui="pixel"] .year-body .primary-button,
+[data-ui="pixel"] .year-body .secondary-button,
+[data-ui="pixel"] #entry-flow .flow-button.primary,
+[data-ui="pixel"] .yr-tour .primary-button{border-radius:0;transition:transform .08s var(--px-ease),box-shadow .08s var(--px-ease),background-color .12s}
+[data-ui="pixel"] .year-body .primary-button{background:var(--px-gold);color:var(--px-ink);border:2px solid var(--px-ink);box-shadow:4px 4px 0 var(--px-red);font-family:var(--px-font-display);font-weight:400;font-size:24px;letter-spacing:.04em;line-height:1}
+[data-ui="pixel"] .year-body .primary-button:hover:not(:disabled){background:var(--px-gold-2);transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--px-red)}
+[data-ui="pixel"] .year-body .primary-button:active:not(:disabled){transform:translate(3px,3px);box-shadow:1px 1px 0 var(--px-red)}
+[data-ui="pixel"] .year-body .primary-button:disabled,
+[data-ui="pixel"] .year-body .primary-button[aria-disabled="true"]{background:var(--px-sand);color:var(--px-slate);box-shadow:4px 4px 0 var(--px-slate);opacity:1}
+[data-ui="pixel"] .year-body .secondary-button{background:var(--px-blue);color:#fff;border:2px solid var(--px-ink);box-shadow:4px 4px 0 var(--px-blue-dk);font-weight:600}
+[data-ui="pixel"] .year-body .secondary-button:hover:not(:disabled){background:var(--px-blue-2);transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--px-blue-dk)}
+[data-ui="pixel"] .year-body .secondary-button:active:not(:disabled){transform:translate(3px,3px);box-shadow:1px 1px 0 var(--px-blue-dk)}
+[data-ui="pixel"] .year-body .text-button{border-radius:0;font-family:var(--px-font-label);letter-spacing:.08em}
+[data-ui="pixel"] .year-body .primary-button .ui-icon,
+[data-ui="pixel"] .year-body .secondary-button .ui-icon{stroke-width:2.4}
+
+/* Square icon buttons on dark surfaces */
+[data-ui="pixel"] .year-body .yr-icon-button,
+[data-ui="pixel"] .year-tools.yr-tools .yr-icon-button{border-radius:0;background:var(--px-navy);border:2px solid var(--px-ink-2);box-shadow:inset 0 0 0 2px var(--px-navy-3),2px 2px 0 var(--px-ink-2);color:var(--px-text)}
+[data-ui="pixel"] .year-body .yr-icon-button:hover{background:var(--px-navy-3);color:var(--px-gold)}
+[data-ui="pixel"] .year-body .yr-icon-button:active{transform:translate(2px,2px);box-shadow:inset 0 0 0 2px var(--px-navy-3)}
+[data-ui="pixel"] .year-body .yr-icon-button[aria-expanded="true"],
+[data-ui="pixel"] .year-body .yr-icon-button[aria-pressed="true"]{background:var(--px-gold);color:var(--px-ink);box-shadow:inset 0 0 0 2px var(--px-gold-2),2px 2px 0 var(--px-ink-2)}
+
+/* ---------- Focus and scrollbars ---------- */
+[data-ui="pixel"] :focus-visible{outline:2px dashed var(--px-gold)!important;outline-offset:3px!important}
+[data-ui="pixel"] *{scrollbar-width:thin;scrollbar-color:var(--px-gold) var(--px-ink)}
+[data-ui="pixel"] ::-webkit-scrollbar{width:10px;height:10px}
+[data-ui="pixel"] ::-webkit-scrollbar-track{background:var(--px-ink)}
+[data-ui="pixel"] ::-webkit-scrollbar-thumb{background:var(--px-gold);border:2px solid var(--px-ink);border-radius:0}
+
+/* ---------- Modal shell: a dark slide ---------- */
+[data-ui="pixel"] body.year-body #modal{border:3px solid var(--px-gold);border-radius:0;background-color:var(--px-ink);background-image:var(--px-ruled-ink);color:var(--px-text);box-shadow:8px 8px 0 var(--px-red),8px 8px 0 3px var(--px-ink-2)}
+[data-ui="pixel"] body.year-body #modal::backdrop{background:#0c1222c4;backdrop-filter:none}
+[data-ui="pixel"] .year-body #modal .modal-top{border-bottom:0;background-image:var(--px-dashed-dim);background-size:100% 2px;background-repeat:no-repeat;background-position:0 100%}
+[data-ui="pixel"] .year-body #modal .modal-top h2{font-family:var(--px-font-display);font-weight:400;font-size:36px;line-height:1.05;letter-spacing:.03em;color:var(--px-gold);text-shadow:var(--px-extrude-red);margin-top:8px}
+[data-ui="pixel"] .year-body #modal .eyebrow{display:inline-flex;align-items:center;gap:6px;width:max-content;max-width:100%;padding:4px 9px 3px;background:var(--px-blue);color:#fff;font:400 12px/1.3 var(--px-font-label);letter-spacing:.12em;text-transform:uppercase;box-shadow:3px 3px 0 var(--px-blue-dk)}
+[data-ui="pixel"] .year-body #modal .close{border-radius:0;border:2px solid var(--px-ink-2);background:var(--px-navy);color:var(--px-gold);box-shadow:inset 0 0 0 2px var(--px-navy-3),3px 3px 0 var(--px-ink-2);font-family:var(--px-font-display)}
+[data-ui="pixel"] .year-body #modal .close:hover{background:var(--px-red);color:#fff;box-shadow:inset 0 0 0 2px #c9604f,3px 3px 0 var(--px-ink-2)}
+[data-ui="pixel"] .year-body #modal .close:active{transform:translate(2px,2px);box-shadow:inset 0 0 0 2px var(--px-navy-3)}
+[data-ui="pixel"] .year-body #modal .modal-body>p{color:var(--px-text-dim)}
+[data-ui="pixel"] .year-body #modal .modal-body h3{font-family:var(--px-font-display);font-weight:400;font-size:24px;letter-spacing:.03em;color:var(--px-gold)}
+@media (prefers-reduced-motion:no-preference){
+  [data-ui="pixel"] #modal[open]{animation:px-modal-in .22s var(--px-ease)}
+  @keyframes px-modal-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+}
+
+/* ---------- Toast ---------- */
+[data-ui="pixel"] .year-body .toast{border-radius:0;border:2px solid var(--px-ink);background:var(--px-card);color:var(--px-ink);box-shadow:4px 4px 0 var(--px-blue);font-weight:500}
+
+/* ---------- 3D map labels (inline styles from the scene) ---------- */
+[data-ui="pixel"] .scene-text-label{border-radius:0!important;border-width:2px!important;border-color:var(--px-ink)!important;box-shadow:2px 2px 0 var(--px-ink)!important;font-family:var(--px-font-pixel)!important;font-weight:400!important;font-size:12px!important;line-height:1.35!important;letter-spacing:.04em!important;-webkit-font-smoothing:none}
+[data-ui="pixel"] .scene-clickable-label:hover{box-shadow:3px 3px 0 var(--px-gold),0 0 0 2px var(--px-gold)!important}
+
+/* ---------- Reduced motion keeps the hard look without movement ---------- */
+@media (prefers-reduced-motion:reduce){
+  [data-ui="pixel"] .year-body .primary-button,[data-ui="pixel"] .year-body .secondary-button{transition:none}
+}
